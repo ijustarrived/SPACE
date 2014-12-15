@@ -1,0 +1,17 @@
+C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 1.2\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\newSpaceContent.contentprojResolveAssemblyReference.cache
+C:\Users\Marybel\Desktop\newSpace 1.2\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 1.3\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 1.4\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 1.5\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 1.6\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 1.7\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 1.8\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 1.8\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\newSpaceContent.contentprojResolveAssemblyReference.cache
+C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 1.9\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\newSpaceContent.contentprojResolveAssemblyReference.cache
+C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 2\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\newSpaceContent.contentprojResolveAssemblyReference.cache
+C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 2\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 2.1\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 2.2\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 2.3\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 2.4\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 2.5\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
