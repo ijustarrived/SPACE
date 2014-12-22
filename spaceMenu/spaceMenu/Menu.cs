@@ -15,6 +15,8 @@ using System.Windows;
 namespace newSpace2_5
 {
     /* Notes, ideas and problems: 3/dec/2014 
+     * 
+     * Maybe poner adds en el main menu, option y mission select
      */
 
     // maneja todo lo que tiene que ver con el menu
@@ -68,6 +70,7 @@ namespace newSpace2_5
            hd = h;
        }
 
+        // regresa el flag para que sea usado en el hud
        public bool SetIsSoundOn()
        {
            return soundOn;
@@ -82,13 +85,26 @@ namespace newSpace2_5
             }
         }
 
+        // calcula los missed shits
+        private double CalcAcurracy(int p, int mi, double min)
+        {
+            min = Math.Abs(mi + p);
+
+            min = p / min;
+
+            min *= 100;
+
+            min = Math.Round(min, 2);
+
+            return min;
+        }
+
         // darkens bg and displays scoreboard
         public void displayScoreboard(int p, int mi, bool isPlayerDead)
         {
             PlayGameOverSong();
 
-            double pts = Convert.ToDouble(p),
-                min = Convert.ToDouble(mi);
+            double min = Convert.ToDouble(mi); // tiene la cantidad de missed shots
 
             if (menuNumber < 2 && isPlayerDead == true)
             {
@@ -96,20 +112,7 @@ namespace newSpace2_5
 
                 if (p > mi)
                 {
-                    min = Math.Abs(mi + p);
-
-                    min = p / min;
-
-                    min *= 100;
-
-                    min = Math.Round(min, 2);
-                }
-
-                else
-                {
-                    //min = mi / p;
-
-                    //min *= 10;
+                    min = CalcAcurracy(p, mi, min);
                 }
 
                 sp.DrawString(sf, "Accuracy: " + Math.Abs(min).ToString() + "%", new Vector2(400, 200), Color.Tomato);

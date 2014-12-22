@@ -14,21 +14,15 @@ using Microsoft.Devices.Sensors;
 
 namespace newSpace2_5
 {
-    /*Notes, stuff to do and ideas 12/dec/2014
-     * 
-     * En algunas ocaciones el hud se queda rojo completo y entra se desaparece por unos
-     * segundos. Gotta fix that.
-     * 
-     * Cuando active el warning section, el color de los pts no deven ser afectados.
+    /*Notes, stuff to do and ideas 15/dec/2014
      *
      * El vol en el pause screen, debe ser igual que en el option. Change that when I can.
      * 
      * Si pierdes y hay un enemy in range se queda running en warning mode, no se si dejarlo asi.
-     * 
-     * Si el death animations starts como que el hud se pone un poco mas oscuro, I don't know why. Quizas es el black layer que
-     * se usa para opacar la pantalla when the player dies.
      *  
      * Check si puedo hacer que el laser valla mas rapido y empieze donde se supone. 
+     * 
+     * Maybe poner adds en el pause screen
      * 
      */
 
@@ -665,6 +659,14 @@ namespace newSpace2_5
             pHit = false;
         }
 
+        // cambia los colores al HUD
+        private void ChangeHudColors(Color hd, Color font)
+        {
+            hdColor = hd;
+
+            ptsFontColor = font;
+        }
+
         //cuando el player le den esto va actualizar su vida de acuerdo al dmg del enemigo
         public void calcPlayerHp(int enemyDmg, SpriteBatch sp)
         {
@@ -772,17 +774,7 @@ namespace newSpace2_5
             {
                 if (red)
                 {
-                    //sp.Draw(hudImgs[0], Vector2.Zero, Color.Red);
-
-                    //sp.Draw(hudImgs[3], imgRec[1], null, Color.Red, 0, centerImgsOrigin[1], SpriteEffects.None, 0);
-
-                    //sp.Draw(hudImgs[2], imgRec[0], null, Color.Red, 0, centerImgsOrigin[0], SpriteEffects.None, 0);
-
-                    //sp.Draw(hudImgs[4], imgRec[3], Color.Red);
-
-                    hdColor = Color.Red;
-
-                    ptsFontColor = Color.White;
+                    ChangeHudColors(Color.Red, Color.White);
 
                     if (counter < 20)
                     {
@@ -801,9 +793,7 @@ namespace newSpace2_5
                 {
                     //displayHD(sp, sf);
 
-                    hdColor = Color.White;
-
-                    ptsFontColor = Color.Navy;
+                    ChangeHudColors(Color.White, Color.Navy);
 
                     if (counter < 20)
                     {
@@ -822,6 +812,8 @@ namespace newSpace2_5
                 //si el enemy is dead, do this
             else
             {
+                ChangeHudColors(Color.White, Color.Navy);
+
                 displayHD(sp, sf);
             }
         }
@@ -867,9 +859,7 @@ namespace newSpace2_5
         //display crosshair. Lo tengo aparte para qu siempre apareca y no se afectado por el warning mode
         public void displayCrosshair(SpriteBatch sp, SpriteFont sf)
         {
-            sp.Draw(hudImgs[5], imgRec[4], null, Color.White, 0, centerImgsOrigin[2], SpriteEffects.None, 0);
-
-            //sp.Draw(hudImgs[5], crossHColiBox, null, Color.White);            
+            sp.Draw(hudImgs[5], imgRec[4], null, Color.White, 0, centerImgsOrigin[2], SpriteEffects.None, 0);           
         }
 
         //displays pause screen si se presiona pause
@@ -888,7 +878,6 @@ namespace newSpace2_5
 
                 //VOLUMEN open
                 sp.Draw(menuImgs[0], new Vector2(270, 220), Color.White);
-
                 
                 //on
                 sp.Draw(menuImgs[1], imgRec[9], Color.White);

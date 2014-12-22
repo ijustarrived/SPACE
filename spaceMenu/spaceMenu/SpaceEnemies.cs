@@ -13,9 +13,9 @@ using Microsoft.Xna.Framework.Media;
 
 namespace newSpace2_5
 {
-    /* Notes, ideas and problems: 12/dec/2014
+    /* Notes, ideas and problems: 15/dec/2014
      * 
-     * Si le disparo al dust de un enemigo no me cuenta como miss. It should miss.
+     * Si le disparo al dust de un enemigo no me cuenta como miss. It should miss. No se como arreglarlo. 
      * 
      * Verificar que hay veces que si chocan 2 a la vez, rapido, cracked screen solo pasa una vez.
      * 
@@ -123,11 +123,6 @@ namespace newSpace2_5
             return misShots;
         }
 
-        public void SetEnemyCounter(int num)
-        {
-            enemyKilledCounter = num;
-        }
-
         //pone todas las imagenes en enemyImgs para que se usen en la clase
         public void SetImgs(Texture2D[] imgList)
         {
@@ -143,6 +138,7 @@ namespace newSpace2_5
             screenVal = value;
         }
 
+        //asigna el flag si el player esta hit
         public void SetPlayerHit(bool hit)
         {
             playerHit = hit;
@@ -666,13 +662,27 @@ namespace newSpace2_5
 
             else
             {
-                //si dispara no choca con el grande y tampoco con el small one
+                // por alguna rason dice que si colisiona con el pequeño con todo y eso que no se esta dibujando.
+                //Para eso esta este si no esta muerto, verifica eso, si esta muerto, vete directo al else.
+               
+                    //si dispara no choca con el grande y tampoco con el small one
                 if (!(crosshairRect.Intersects(smallEnemyRect)))
                 {
                     misShots++;
 
                     ResetMult();
                 }
+                
+
+                //else
+                //{
+                //    if (isSmallKilled)
+                //    {
+                //        misShots++;
+
+                //        ResetMult();
+                //    }
+                //}
             }
         }
 
@@ -701,7 +711,7 @@ namespace newSpace2_5
             }
 
             else
-            {
+            {                
                 //si dispara no choca con el grande y tampoco con el small one
                 if (!(crosshairRect.Intersects(bigEnemyRect)))
                 {
@@ -709,6 +719,18 @@ namespace newSpace2_5
 
                     ResetMult();
                 }
+                
+
+                //else
+                //{
+                //    if (isBigKilled)
+                //    {
+                //        misShots++;
+
+                //        ResetMult();
+                //    }
+                    
+                //}
             }
         }
 
