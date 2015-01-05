@@ -10,13 +10,10 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 
-namespace newSpace2_5
+namespace newSpace3
 {
 
-    /* To do and notes: 23/nov/2014
-     * 
-     * agregar una pantalla cool para el gameOver. Si quiero que la musica pegue con el screen dim, 
-     * lo que tengo que hacer es que le resto mucho menos a la intensidad del negro y se tarda mas
+    /* To do and notes: 2/jan/2014
      * 
      */
     public class Main : Microsoft.Xna.Framework.Game
@@ -24,13 +21,14 @@ namespace newSpace2_5
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Texture2D[] imgs = new Texture2D[11], // tiene todas las imagenes 
+        Texture2D[] imgs = new Texture2D[14], // tiene todas las imagenes 
             mapImages,
             enemyImages,
             hudImages;
 
-        Boolean killed, // tiene el valor de enemyKilled de spaceEnemies
-            killed2;
+        Boolean bigKilled, // tiene el valor de enemyKilled de spaceEnemies
+            graySmallKilled,
+            smallKilled;
 
         Rectangle[] enemyRect; // tiene todos los rectangulos de los enemigo que estan en la clase de spaceEnemies
 
@@ -42,20 +40,22 @@ namespace newSpace2_5
 
         SpriteFont sf;
 
-        Song menuSong,
+        Song menuSong, // Main menu song
             gameOverSong,
             inGameSong;
 
         float colorTranspIntensity = 0.0f;
 
         #region objetos de cada clase
-        Menu m = new Menu(); // objeto de menu
+        Menu men = new Menu(); // objeto de menu
 
         Map mp = new Map();
 
         HUD hd = new HUD();
 
         SpaceEnemies se = new SpaceEnemies();
+
+        LoadNSave loadSave = new LoadNSave();
 
         #endregion
 
@@ -75,23 +75,32 @@ namespace newSpace2_5
             InactiveSleepTime = TimeSpan.FromSeconds(1);
         }
 
+        protected override void OnActivated(object sender, EventArgs args)
+        {
+            loadSave.LoadFile(men);
+
+            base.OnActivated(sender, args);
+        }
+
         protected override void Initialize()
         {
             mapImages = new Texture2D[1];
 
             hd.InitAccel();
 
-            hudImages = new Texture2D[10];
+            hudImages = new Texture2D[18];
 
-            enemyImages = new Texture2D[3];
+            enemyImages = new Texture2D[9];
 
-            hd.getMenu(m);
+            hd.getMenu(men);
 
             hd.GetSpaceEnemies(se);
 
-            m.setHud(hd);
+            men.setHud(hd);
 
             se.SetHd(hd);
+
+            men.SetSpaceEnemies(se);
 
             base.Initialize();
         }
@@ -102,9 +111,9 @@ namespace newSpace2_5
 
             #region menu images
 
-            imgs[7] = Content.Load<Texture2D>(@"pictures/arcadeBtn");
+            imgs[0] = Content.Load<Texture2D>(@"pictures/menuBG");
 
-            imgs[10] = Content.Load<Texture2D>(@"pictures/campBtn");
+            imgs[1] = Content.Load<Texture2D>(@"pictures/optBG");
 
             imgs[2] = Content.Load<Texture2D>(@"pictures/volClosed");
 
@@ -116,15 +125,21 @@ namespace newSpace2_5
 
             imgs[6] = Content.Load<Texture2D>(@"pictures/optionBtn");
 
-            imgs[0] = Content.Load<Texture2D>(@"pictures/menuBG");
+            imgs[7] = Content.Load<Texture2D>(@"pictures/arcadeBtn");
 
             imgs[8] = Content.Load<Texture2D>(@"pictures/off");
 
             imgs[9] = Content.Load<Texture2D>(@"pictures/on");
 
-            imgs[1] = Content.Load<Texture2D>(@"pictures/optBG");
+            imgs[10] = Content.Load<Texture2D>(@"pictures/campBtn");
 
-            m.getImgs(imgs, spriteBatch);
+            imgs[11] = Content.Load<Texture2D>(@"pictures/GameOver");
+
+            imgs[12] = Content.Load<Texture2D>(@"pictures/mainMenuBtn");
+
+            imgs[13] = Content.Load<Texture2D>(@"pictures/retryBtn"); 
+
+            men.getImgs(imgs, spriteBatch);
 
             #endregion
 
@@ -153,11 +168,27 @@ namespace newSpace2_5
 
             hudImages[6] = Content.Load<Texture2D>(@"HUDpics/shotImg");
 
-            hudImages[7] = Content.Load<Texture2D>(@"HUDpics/Pause_screen");
+            hudImages[7] = Content.Load<Texture2D>(@"HUDpics/GamePaused");
 
             hudImages[8] = Content.Load<Texture2D>(@"HUDpics/return");
 
             hudImages[9] = Content.Load<Texture2D>(@"HUDpics/Resume");
+
+            hudImages[10] = Content.Load<Texture2D>(@"HUDpics/X2");
+
+            hudImages[11] = Content.Load<Texture2D>(@"HUDpics/X4");
+
+            hudImages[12] = Content.Load<Texture2D>(@"HUDpics/X6");
+
+            hudImages[13] = Content.Load<Texture2D>(@"HUDpics/X8");
+
+            hudImages[14] = Content.Load<Texture2D>(@"HUDpics/ON");
+
+            hudImages[15] = Content.Load<Texture2D>(@"HUDpics/OFF");
+
+            hudImages[16] = Content.Load<Texture2D>(@"HUDpics/vOpen");
+
+            hudImages[17] = Content.Load<Texture2D>(@"HUDpics/Retry");
 
             hd.getHUDImg(hudImages, imgs);
 
@@ -170,6 +201,14 @@ namespace newSpace2_5
             enemyImages[1] = Content.Load<Texture2D>(@"EnemyPics/meteor2");
 
             enemyImages[2] = Content.Load<Texture2D>(@"EnemyPics/Explosion");
+
+            enemyImages[3] = Content.Load<Texture2D>(@"EnemyPics/greymanSmall");
+
+            enemyImages[4] = Content.Load<Texture2D>(@"EnemyPics/greyMan3Explo1");
+
+            enemyImages[5] = Content.Load<Texture2D>(@"EnemyPics/greyMan3Explo2");
+
+            enemyImages[6] = Content.Load<Texture2D>(@"EnemyPics/greyMan3Explo3");
 
             se.SetImgs(enemyImages);
 
@@ -193,7 +232,7 @@ namespace newSpace2_5
 
             se.SetFx(enemyDead);
 
-            m.getSound(btnSound, shotSound);
+            men.getSound(btnSound, shotSound);
 
             #endregion
 
@@ -205,7 +244,7 @@ namespace newSpace2_5
 
             gameOverSong = Content.Load<Song>(@"audio-fx/gameOver");
 
-            m.getSongs(menuSong, inGameSong, gameOverSong);
+            men.getSongs(menuSong, inGameSong, gameOverSong);
 
             #endregion
 
@@ -213,7 +252,7 @@ namespace newSpace2_5
 
             sf = Content.Load<SpriteFont>("font");
 
-            m.getsf(sf);
+            men.getsf(sf);
 
             MediaPlayer.IsRepeating = true;
 
@@ -228,20 +267,28 @@ namespace newSpace2_5
 
         protected override void Update(GameTime gameTime)
         {
-            m.startMusic();
+            men.startMusic();
 
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
             {
-                if (m.setExit())
+                if (men.setExit())
                 {
                     this.Exit();
                 }
 
-                m.backBtn();                
+                men.backBtn();                
             }
 
             base.Update(gameTime);
+        }
+
+        // pasa el valor del screen a hd y a space enemies
+        private void PlaceScrnValues()
+        {
+            se.SetScrnValue(hd.setScreenValue());
+
+            hd.getScreenValue(se.GetScreenVal());
         }
 
         protected override void Draw(GameTime gameTime)
@@ -253,7 +300,7 @@ namespace newSpace2_5
             #region stuff to run when switches to ingame mode
 
             //only makes enemies move closer
-            if (m.setIsGameRunning())
+            if (men.setIsGameRunning())
             {
                 hd.GetIsSoundOn();
 
@@ -263,22 +310,21 @@ namespace newSpace2_5
 
                 enemyRect = se.GetEnemyRecs();
 
-                killed = se.GetEnemyKilled();
+                bigKilled = se.GetBigEnemyKilled();
 
-                se.SetScrnValue(hd.setScreenValue());
+                PlaceScrnValues();
+                smallKilled = se.GetSmallEnemyKilled();
 
-                hd.getScreenValue(se.GetScreenVal());
+                PlaceScrnValues();
 
-                killed2 = se.GetEnemyKilled2();
+                graySmallKilled = se.GetSmallGrayKilled();
 
-                hd.getScreenValue(se.GetScreenVal());
-
-                se.SetScrnValue(hd.setScreenValue());
+                PlaceScrnValues();
             }
 
             #endregion
 
-            m.playSections(se, mp, killed, killed2, mapImages);
+            men.playSections(se, mp, bigKilled, smallKilled, graySmallKilled, mapImages);
 
             #region gameover black screen thing
 
@@ -295,7 +341,7 @@ namespace newSpace2_5
 
                 else
                 {
-                    m.displayScoreboard(se.GetPts(), se.GetMiss(), hd.setPlayerDied());
+                    men.displayScoreboard(se.GetPts(), se.GetMiss(), hd.setPlayerDied());
                 }
             }
 
@@ -304,6 +350,13 @@ namespace newSpace2_5
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        protected override void OnExiting(object sender, EventArgs args)
+        {
+            loadSave.SafeFile(men);
+
+            base.OnExiting(sender, args);
         }
     }
 }

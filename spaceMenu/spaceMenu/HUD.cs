@@ -12,17 +12,14 @@ using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Devices.Sensors;
 
-namespace newSpace2_5
+namespace newSpace3
 {
-    /*Notes, stuff to do and ideas 15/dec/2014
-     *
-     * El vol en el pause screen, debe ser igual que en el option. Change that when I can.
+    /*Notes, stuff to do and ideas 4/jan/2014
      * 
-     * Si pierdes y hay un enemy in range se queda running en warning mode, no se si dejarlo asi.
-     *  
-     * Check si puedo hacer que el laser valla mas rapido y empieze donde se supone. 
+     * randomly aveces el hud desaparece, puede ser cuando 2 van a la vez. Verificar el warning section.
      * 
-     * Maybe poner adds en el pause screen
+     * Verificar que si el fx del screen crack plays y matas un enemigo mientras ese sta playing, el fx del enemy deaths no suena.
+     * En otras ocaciones el screen crack fx plays y despues el enemy death fx plays sin haber matado uno
      * 
      */
 
@@ -38,12 +35,13 @@ namespace newSpace2_5
         private SoundEffect screenCrackSound,
             playerExplosionSound;
 
-        private Texture2D[] hudImgs = new Texture2D[10], // todas las imagenes
+        private Texture2D[] hudImgs = new Texture2D[18], // todas las imagenes
             menuImgs = new Texture2D[3]; // tiene las imagenes del volumen
 
-        private Rectangle[] imgRec = new Rectangle[11]; //rectangulos del top y bot layer del hp, enemy hp y laser shot
+        private Rectangle[] imgRec = new Rectangle[12]; //rectangulos del top y bot layer del hp, enemy hp y laser shot
 
-        private Rectangle crossHColiBox; // crosshair collision box es un rect small encima del rect del crosshair y con eso es que se verifica colision
+        private Rectangle crossHColiBox, // crosshair collision box es un rect small encima del rect del crosshair y con eso es que se verifica colision
+                    clickedArea;
 
         #region vectors
 
@@ -63,6 +61,7 @@ namespace newSpace2_5
         private Accelerometer acc;
 
         MouseState previous_State,
+            newState,
             mousymouse;
 
         private float menuNum = 0, // tiene el valor del current section
@@ -70,7 +69,7 @@ namespace newSpace2_5
 
         #region bools
 
-        private bool red = true, // flag par que cambie a rojo todo
+        private bool red = false, // flag par que cambie a rojo todo
             isSoundOn = true, // flag que te deja saber si el sounido esta prendido
             playCrackedScreenOnce = false, // flag que te deja saber que se de play una vez y no muchas veces   
             playPlayerExplosionOnce = false,
@@ -342,33 +341,36 @@ namespace newSpace2_5
                 hudImgs[6].Width - 250, hudImgs[6].Height - 250);
 
             //pause button
-            imgRec[3] = new Rectangle(365, 417, 70, 70);
+            imgRec[3] = new Rectangle(375, 427, 50, 50);
 
             // full crosshair box
             imgRec[4] = new Rectangle(Convert.ToInt32(crosshairPos.X), Convert.ToInt32(crosshairPos.Y), hudImgs[5].Width - 70, hudImgs[5].Height - 70);
 
             // laser right
             imgRec[5] = new Rectangle(Convert.ToInt32(initialLaserPosition.X), Convert.ToInt32(initialLaserPosition.Y),
-                hudImgs[6].Width - 250, hudImgs[6].Height - 250);            
+                                        hudImgs[6].Width - 250, hudImgs[6].Height - 250);            
 
             /* crosshair small box. How this works es que hay un small rect en el medio del crosshair, pero doesn't bound el crosshair y eso es lo que verifica si
              colisiona con los meteoros */
             crossHColiBox = new Rectangle(Convert.ToInt32(crosshairPos.X), Convert.ToInt32(crosshairPos.Y), hudImgs[5].Width - 120, hudImgs[5].Height - 120);
 
             //pause screen
-            imgRec[6] = new Rectangle(110, 70, hudImgs[7].Width - 680, hudImgs[7].Height - 450);
+            imgRec[6] = new Rectangle(120, 30, hudImgs[7].Width + 160, hudImgs[7].Height + 100);
 
-            //return to menu img
-            imgRec[7] = new Rectangle(250, 300, hudImgs[8].Width - 320, hudImgs[8].Height - 40);
+            ////return to menu img
+            //imgRec[7] = new Rectangle(250, 300, hudImgs[8].Width - 320, hudImgs[8].Height - 40);
 
-            //resume to game img
-            imgRec[8] = new Rectangle(290, 130, hudImgs[9].Width - 140, hudImgs[8].Height- 40);
+            ////resume to game img
+            //imgRec[8] = new Rectangle(290, 130, hudImgs[9].Width - 140, hudImgs[8].Height- 40);
 
             //on Img
-            imgRec[9] = new Rectangle(400, 220, menuImgs[1].Width, menuImgs[1].Height);
+            imgRec[9] = new Rectangle(517, 159, hudImgs[14].Width - 15, hudImgs[14].Height - 15);
 
             //off Img
-            imgRec[10] = new Rectangle(470, 220, menuImgs[2].Width, menuImgs[2].Height);
+            imgRec[10] = new Rectangle(572, 159, hudImgs[15].Width - 15, hudImgs[15].Height - 15);
+
+            //Retry img
+            imgRec[11] = new Rectangle(430, 230, hudImgs[17].Width - 10, hudImgs[17].Height - 10);
         }
 
         // update el hp de acuerdo al length del lower y top layer
@@ -410,7 +412,7 @@ namespace newSpace2_5
             AccelStart();
         }
 
-        // verifica si presiono resume en el pause screen
+        // verifica si presiono resume txt en el pause screen
         public void CheckIfResumeTxtWasPressed(ref Boolean hasPaused, ref bool inGameRunning, Rectangle mouseRect)
         {
             if (mouseRect.Intersects(imgRec[8]))
@@ -447,8 +449,8 @@ namespace newSpace2_5
             }
         }
 
-        // verifica si presiono el pause pegado al frame
-        public void checkIfReturnImgWasPressed(ref Boolean hasPaused, ref bool inGameRunning, Rectangle mouseRect)
+        // verifica si presiono el resume img pegado al frame
+        public void checkIfResumeImgWasPressed(ref Boolean hasPaused, ref bool inGameRunning, Rectangle mouseRect)
         {
             if (mouseRect.Intersects(imgRec[3]))
             {
@@ -489,13 +491,43 @@ namespace newSpace2_5
             }
         }
 
-        //verifica si return en el pause screen
+        //verifica si presiono return en el pause screen
         public void checkIfReturnTxtWasPressed(Rectangle mouseRect)
         {
             if (mouseRect.Intersects(imgRec[7]))
             {
                 men.ResetInGame();
             }
+        }
+
+        //main menu btn on pause screen
+        public void MainMenuBtn(SpriteBatch sp)
+        {
+            previous_State = Mouse.GetState();
+
+            //men.assignMouseStuff(newState);
+
+            if (clickedArea.Intersects(imgRec[7]))
+            {
+                sp.Draw(hudImgs[8], imgRec[7], Color.White);
+
+                if (previous_State.LeftButton == ButtonState.Pressed && newState.LeftButton == ButtonState.Pressed)
+                {
+                    sp.Draw(hudImgs[8], imgRec[7], Color.LightGray);
+                }
+
+                else if (previous_State.LeftButton == ButtonState.Released && newState.LeftButton == ButtonState.Pressed)
+                {
+                    men.backBtn();
+                }
+            }
+
+            else
+            {
+                sp.Draw(hudImgs[8], imgRec[7], Color.White);
+            }
+
+            //newState = previous_State; 
         }
 
         // hace el calulo de mover el laser shot
@@ -505,22 +537,24 @@ namespace newSpace2_5
 
                 mousymouse = Mouse.GetState();
 
-                Rectangle clickedArea = new Rectangle(mousymouse.X, mousymouse.Y, 30, 30);
+                clickedArea = new Rectangle(mousymouse.X, mousymouse.Y, 30, 30);
 
                 if (mousymouse.LeftButton == ButtonState.Pressed && previous_State.LeftButton == ButtonState.Released)
                 {
                     if (!playerDied)
                     {
-                        checkIfReturnImgWasPressed(ref hasPaused, ref inGameRunning, clickedArea);
+                        checkIfResumeImgWasPressed(ref hasPaused, ref inGameRunning, clickedArea);
 
-                        checkIfReturnTxtWasPressed(clickedArea);
+                        //checkIfReturnTxtWasPressed(clickedArea);
 
                         CheckIfResumeTxtWasPressed(ref hasPaused, ref inGameRunning, clickedArea);
+
+
 
                         //pon el vol en el pause screen si fue presionado el pause
                         if (hasPaused)
                         {
-                            men.volColli(imgRec[10], imgRec[9], clickedArea);
+                            //men.volColli(imgRec[10], imgRec[9], clickedArea);
                         }
 
                         else 
@@ -660,11 +694,11 @@ namespace newSpace2_5
         }
 
         // cambia los colores al HUD
-        private void ChangeHudColors(Color hd, Color font)
+        public void ChangeHudColors(Color hd, Color font)
         {
             hdColor = hd;
 
-            ptsFontColor = font;
+            //ptsFontColor = font;
         }
 
         //cuando el player le den esto va actualizar su vida de acuerdo al dmg del enemigo
@@ -730,6 +764,7 @@ namespace newSpace2_5
             centerImgsOrigin[2].Y -= 19;
         }
 
+        //corre la animacion del cracked screen
         public void playScreenCrackAnimation(SpriteBatch sp, bool hit)
         {
             if (hit)
@@ -740,6 +775,7 @@ namespace newSpace2_5
 
                     pHit = hit;
 
+                    // si el valor del screen es mayor a zero por se le resta
                     if (screenValue > 0)
                     {
                         sp.Draw(hudImgs[1], Vector2.Zero, Color.White * screenValue);
@@ -836,10 +872,39 @@ namespace newSpace2_5
             isInGamePaused = hasPaused;
         }
 
+        //display multiplier imgs
+        public void DisplayMultiplier(SpriteBatch sp)
+        {
+            if (sE.GetIsMultActive())
+            {
+                if (sE.GetMultMultiplo() == 20)
+                {
+                    sp.Draw(hudImgs[10], new Vector2(150, 370), Color.White);
+                }
+
+                else if (sE.GetMultMultiplo() == 40)
+                {
+                    sp.Draw(hudImgs[11], new Vector2(150, 370), Color.White);
+                }
+
+                else if (sE.GetMultMultiplo() == 60)
+                {
+                    sp.Draw(hudImgs[12], new Vector2(150, 370), Color.LightYellow);
+                }
+
+                else if (sE.GetMultMultiplo() > 79)
+                {
+                    sp.Draw(hudImgs[13], new Vector2(150, 370), Color.Gold);
+                }
+
+                //sp.DrawString(sf, sE.GetMultMultiplo().ToString() + "X", new Vector2(150, 423), Color.MediumBlue);
+            }
+        }
+
         //display HUD normal
         public void displayHD(SpriteBatch sp, SpriteFont sf)
         {
-                sp.Draw(hudImgs[0], Vector2.Zero, hdColor);
+                sp.Draw(hudImgs[0], new Rectangle(0, 0, hudImgs[0].Width - 10, hudImgs[0].Height), hdColor);
 
                 sp.Draw(hudImgs[3], imgRec[1], null, hdColor, 0, centerImgsOrigin[1], SpriteEffects.None, 0);
 
@@ -848,12 +913,13 @@ namespace newSpace2_5
                 sp.Draw(hudImgs[4], imgRec[3], hdColor);
 
             //pts
-                sp.DrawString(sf, sE.GetPts().ToString(), new Vector2(530, 423), ptsFontColor);
+                sp.DrawString(sf, sE.GetPts().ToString(), new Vector2(580, 435), Color.LightGray);
 
-                if (sE.GetIsMultActive())
-                {
-                    sp.DrawString(sf, sE.GetMultMultiplo().ToString() + "X", new Vector2(150, 423), Color.MediumBlue);
-                }
+                DisplayMultiplier(sp);
+
+                //sp.DrawString(sf, "red: " + red.ToString(), new Vector2(100, 200), Color.Yellow);
+
+                
         }
 
         //display crosshair. Lo tengo aparte para qu siempre apareca y no se afectado por el warning mode
@@ -862,28 +928,257 @@ namespace newSpace2_5
             sp.Draw(hudImgs[5], imgRec[4], null, Color.White, 0, centerImgsOrigin[2], SpriteEffects.None, 0);           
         }
 
+        /*
+         * Por alguna razon podias collide con todo y eso con no estuvieran dibujados.
+         * Se llama cada vez que empieze un nuevo juego.
+         */
+        public void ResetResumeNReturnRects()
+        {
+            imgRec[7] = new Rectangle();
+
+            imgRec[8] = new Rectangle();
+        }
+
+        private void PausevolBtns(SpriteBatch sp)
+        {
+            //cada vez que se entra a un menu se necesita empezar con esto para empezar con un nuevo state
+            //previous_State = Mouse.GetState();
+
+            //clickedArea = new Rectangle(previous_State.X, previous_State.Y, 30, 30);
+
+            previous_State = Mouse.GetState();
+
+            #region On
+
+            if (clickedArea.Intersects(imgRec[9]))
+            {
+                if (previous_State.LeftButton == ButtonState.Pressed && newState.LeftButton == ButtonState.Pressed)
+                {
+                    sp.Draw(hudImgs[14], imgRec[9], Color.LightBlue);
+                }
+
+                else if (previous_State.LeftButton == ButtonState.Released && newState.LeftButton == ButtonState.Pressed)
+                {
+                    sp.Draw(hudImgs[14], imgRec[9], Color.LightBlue);
+
+                    men.GetIsSoundOn(true);
+
+                    //soundOn = true;
+
+                    //// si el ultimo menu num fue ingame mode do this
+                    //if (lastMenuNum == 1)
+                    //{
+                    //    MediaPlayer.Play(menuSong);
+
+                    //    lastMenuNum = menuNumber;
+                    //}
+
+                    //else
+                    //{
+                        MediaPlayer.Resume();
+                    //}
+
+                    men.playBtnSound();
+                }
+
+                else
+                {
+                    if (men.SetIsSoundOn())
+                    {
+                        sp.Draw(hudImgs[14], imgRec[9], Color.LightBlue);
+                    }
+
+                    else
+                    {
+                        sp.Draw(hudImgs[14], imgRec[9], Color.White);
+                    }
+                }
+            }
+
+            else
+            {
+                if (men.SetIsSoundOn())
+                {
+                    sp.Draw(hudImgs[14], imgRec[9], Color.LightBlue);
+                }
+
+                else
+                {
+                    sp.Draw(hudImgs[14], imgRec[9], Color.White);
+                }
+            }
+
+            //newState = previous_State;            
+
+            #endregion
+
+            #region off
+
+            //previous_State = Mouse.GetState();
+
+            //clickedArea = new Rectangle(previous_State.X, previous_State.Y, 30, 30);
+
+            if (clickedArea.Intersects(imgRec[10]))
+            {
+                if (previous_State.LeftButton == ButtonState.Pressed && newState.LeftButton == ButtonState.Pressed)
+                {
+                    sp.Draw(hudImgs[15], imgRec[10], Color.LightBlue);
+                }
+
+                else if (previous_State.LeftButton == ButtonState.Released && newState.LeftButton == ButtonState.Pressed)
+                {
+                    sp.Draw(hudImgs[15], imgRec[10], Color.LightBlue);
+
+                    men.playBtnSound();
+
+                    men.GetIsSoundOn(false);
+
+                    //soundOn = false;
+
+                    MediaPlayer.Pause();
+                }
+
+                else
+                {
+                    if (!men.SetIsSoundOn())
+                    {
+                        sp.Draw(hudImgs[15], imgRec[10], Color.LightBlue);
+                    }
+
+                    else
+                    {
+                        sp.Draw(hudImgs[15], imgRec[10], Color.White);
+                    }
+                }
+            }
+
+            else
+            {
+                if (!men.SetIsSoundOn())
+                {
+                    sp.Draw(hudImgs[15], imgRec[10], Color.LightBlue);
+                }
+
+                else
+                {
+                    sp.Draw(hudImgs[15], imgRec[10], Color.White);
+                }
+            }
+
+            #endregion
+
+            //newState = previous_State;
+        }
+
+        private void PauseRetryBtn(SpriteBatch sp)
+        {
+            previous_State = Mouse.GetState();
+
+            if (clickedArea.Intersects(imgRec[11]))
+            {
+                sp.Draw(hudImgs[17], imgRec[11], Color.White);
+
+                if (previous_State.LeftButton == ButtonState.Pressed && newState.LeftButton == ButtonState.Pressed)
+                {
+                    sp.Draw(hudImgs[17], imgRec[11], Color.LightBlue);
+                }
+
+                else if (previous_State.LeftButton == ButtonState.Released && newState.LeftButton == ButtonState.Pressed)
+                {
+                    sp.Draw(hudImgs[17], imgRec[11], Color.LightBlue);
+
+                    #region shit to assign and run when arcade is pressed
+
+                    ////para que haga lo del screen crack animation bien y que no lo haga en lugar donde no se supone que este
+                    //hd.getPlayerDied(false);
+
+                    ////reset hp bars
+                    //hd.reset();
+
+                    //sp.Draw(img, MenuImgsRec[13], Color.LightGray);
+
+                    //hd.getScreenValue(1);
+
+                    //hd.ChangeHudColors(Color.White, Color.Navy);
+
+                    //hasGameOverSongStarted = false;
+
+                    //isInGameRunning = true;
+
+                    //hasInGamePaused = false;
+
+                    //hd.getIsInGameRunning(isInGameRunning);
+
+                    //hasSongStarted = false;
+
+                    //menuNumber = 1;
+
+                    //se.SetPts(0);
+
+                    //se.fullReset();                    
+
+                    //hd.updatePlayerHp();
+
+                    //playBtnSound();
+
+                    //hd.AccelStart();
+
+                    #endregion
+
+                    men.BeforeArcadeStarts(hudImgs[17]);
+
+                    UnpauseGame(ref isInGamePaused, ref isInGameRunning);
+                }
+            }
+
+            else
+            {
+                sp.Draw(hudImgs[17], imgRec[11], Color.White);
+            }
+        }
+
         //displays pause screen si se presiona pause
         public void DisplayPauseScrn(SpriteBatch sp)
         {
+            //previous_State = Mouse.GetState();
+
+            //mousymouse = Mouse.GetState();
+
+            //clickedArea = new Rectangle(previous_State.X, previous_State.Y, 30, 30);
+
             if (isInGamePaused)
             {
                 //screen
                 sp.Draw(hudImgs[7], imgRec[6], Color.White);
 
+                //return to menu img
+                imgRec[7] = new Rectangle(122, 340, hudImgs[8].Width + 155, hudImgs[8].Height + 10);
+
                 //return
-                sp.Draw(hudImgs[8], imgRec[7], Color.White);
+                //sp.Draw(hudImgs[8], imgRec[7], Color.White);
+
+                MainMenuBtn(sp);
+
+                //resume to game img
+                imgRec[8] = new Rectangle(430, 85, hudImgs[9].Width - 30, hudImgs[9].Height - 10);
 
                 //resume
                 sp.Draw(hudImgs[9], imgRec[8], Color.White);
 
                 //VOLUMEN open
-                sp.Draw(menuImgs[0], new Vector2(270, 220), Color.White);
-                
-                //on
-                sp.Draw(menuImgs[1], imgRec[9], Color.White);
+                sp.Draw(hudImgs[16], new Rectangle(428, 153, hudImgs[16].Width + 42, hudImgs[16].Height + 16), Color.White);
 
-                //off
-                sp.Draw(menuImgs[2], imgRec[10], Color.White);
+                PausevolBtns(sp);
+
+                PauseRetryBtn(sp);
+
+                newState = previous_State;
+
+                //on
+                //sp.Draw(menuImgs[1], imgRec[9], Color.White);
+
+                ////off
+                //sp.Draw(menuImgs[2], imgRec[10], Color.White);
             }
         }
 
@@ -904,12 +1199,14 @@ namespace newSpace2_5
                 playWarningMode(sp,k,sf);
             }
 
-            else if (anchoActual < (int)widthTillImpact)
+            else if (anchoActual <= (int)widthTillImpact)
             {
                 displayHD(sp, sf);
 
                 DisplayPauseScrn(sp);
             }
+
+            //sp.DrawString(sf, "kill: " + k.ToString(), new Vector2(100, 300), Color.Yellow);
         }
     }
 }

@@ -12,11 +12,10 @@ using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 using System.Windows;
 
-namespace newSpace2_5
+namespace newSpace3
 {
-    /* Notes, ideas and problems: 3/dec/2014 
+    /* Notes, ideas and problems: 2/dec/2014 
      * 
-     * Maybe poner adds en el main menu, option y mission select
      */
 
     // maneja todo lo que tiene que ver con el menu
@@ -26,9 +25,11 @@ namespace newSpace2_5
 
         private HUD hd;
 
-        private Texture2D[] imgs = new Texture2D[11]; // tiene todas las imgs
+        private SpaceEnemies se;
 
-        private Rectangle[] MenuImgsRec = new Rectangle[11]; // tiene todos los rec de todas la imagenes
+        private Texture2D[] imgs = new Texture2D[14]; // tiene todas las imgs
+
+        private Rectangle[] MenuImgsRec = new Rectangle[14]; // tiene todos los rec de todas la imagenes
             
         private Rectangle mouseRect = new Rectangle(); // tiene el rectangulo del mouse
 
@@ -43,7 +44,8 @@ namespace newSpace2_5
 
         Color col = Color.White;
 
-        int granTotal = 0; // guarda el resultado de points menos missedShots 
+        int granTotal = 0, // guarda el resultado de points menos missedShots 
+            highScore; // name says it
 
         private float menuNumber = 0.0f, //te deja saber en que parte del menu estas. 0 = main menu, 1 = start arcade, 2 = campaing, 3 = option y
             // 4 = start campaing mission
@@ -65,9 +67,15 @@ namespace newSpace2_5
 
         #endregion
 
+
        public void setHud(HUD h)
        {
            hd = h;
+       }
+
+       public void SetSpaceEnemies(SpaceEnemies spE)
+       {
+           se = spE;
        }
 
         // regresa el flag para que sea usado en el hud
@@ -76,10 +84,16 @@ namespace newSpace2_5
            return soundOn;
        }
 
+        // el valor se asigna cuando se presionan los btns en pause screen
+       public void GetIsSoundOn(bool isSoundOn)
+       {
+           soundOn = isSoundOn;
+       }
+
        //asigna imagenes a los rectangulos
         private void setRects()
         {
-            for (int i = 1; i < MenuImgsRec.Length; i++)
+            for (int i = 0; i < MenuImgsRec.Length; i++)
             {
                 MenuImgsRec[i] = new Rectangle(0,0,imgs[i].Width, imgs[i].Height);
             }
@@ -99,6 +113,164 @@ namespace newSpace2_5
             return min;
         }
 
+        //verifica si el final score es mas alto que el high score y si lo es lo asigna
+        public void CalcHighScore()
+        {
+            if (granTotal > highScore)
+            {
+                highScore = granTotal;
+            }
+        }
+
+        //para cuando el juego se haga load
+        public void SetHighScore(int score)
+        {
+            highScore = score;
+        }
+
+        // para cuando se haga save
+        public int GetHighScore()
+        {
+            return highScore;
+        }
+
+        public void BeforeArcadeStarts(Texture2D img)
+        {
+            //para que haga lo del screen crack animation bien y que no lo haga en lugar donde no se supone que este
+            hd.getPlayerDied(false);
+
+            //reset hp bars
+            hd.reset();
+
+            //sp.Draw(img, MenuImgsRec[13], Color.LightGray);
+
+            hd.getScreenValue(1);
+
+            hd.ChangeHudColors(Color.White, Color.Navy);
+
+            hasGameOverSongStarted = false;
+
+            isInGameRunning = true;
+
+            hasInGamePaused = false;
+
+            hd.getIsInGameRunning(isInGameRunning);
+
+            hasSongStarted = false;
+
+            menuNumber = 1;
+
+            se.SetPts(0);
+
+            se.fullReset();
+
+            hd.updatePlayerHp();
+
+            playBtnSound();
+
+            hd.AccelStart();
+        }
+
+        //retry btn when pressed on the game over screen
+        public void GameOverRetryBtn(Texture2D img, Rectangle rect)
+        {
+            oldState = Mouse.GetState();
+
+             assignMouseStuff(newState);
+
+            if (mouseRect.Intersects(rect))
+            {
+                sp.Draw(img, rect, Color.White);
+
+                if (oldState.LeftButton == ButtonState.Pressed && newState.LeftButton == ButtonState.Pressed)
+                {
+                    sp.Draw(img, rect, Color.LightGray);
+                }
+
+                else if (oldState.LeftButton == ButtonState.Released && newState.LeftButton == ButtonState.Pressed)
+                {
+                    sp.Draw(img, rect, Color.LightGray);
+
+                    #region shit to assign and run when arcade is pressed
+
+                    ////para que haga lo del screen crack animation bien y que no lo haga en lugar donde no se supone que este
+                    //hd.getPlayerDied(false);
+
+                    ////reset hp bars
+                    //hd.reset();
+
+                    //sp.Draw(img, MenuImgsRec[13], Color.LightGray);
+
+                    //hd.getScreenValue(1);
+
+                    //hd.ChangeHudColors(Color.White, Color.Navy);
+
+                    //hasGameOverSongStarted = false;
+
+                    //isInGameRunning = true;
+
+                    //hasInGamePaused = false;
+
+                    //hd.getIsInGameRunning(isInGameRunning);
+
+                    //hasSongStarted = false;
+
+                    //menuNumber = 1;
+
+                    //se.SetPts(0);
+
+                    //se.fullReset();                    
+
+                    //hd.updatePlayerHp();
+
+                    //playBtnSound();
+
+                    //hd.AccelStart();
+
+                    #endregion
+
+                    BeforeArcadeStarts(img);
+                }
+            }
+
+            else
+            {
+                sp.Draw(img, rect, Color.White);
+            }
+
+            newState = oldState;        
+        }
+
+        //action del main menu btn
+        public void GameOverMainMenuBtn()
+        {
+            oldState = Mouse.GetState();
+
+            assignMouseStuff(newState);
+
+            if (mouseRect.Intersects(MenuImgsRec[12]))
+            {
+                sp.Draw(imgs[12], MenuImgsRec[12], Color.White);
+
+                if (oldState.LeftButton == ButtonState.Pressed && newState.LeftButton == ButtonState.Pressed)
+                {
+                    sp.Draw(imgs[12], MenuImgsRec[12], Color.LightGray);
+                }
+
+                else if (oldState.LeftButton == ButtonState.Released && newState.LeftButton == ButtonState.Pressed)
+                {
+                    backBtn();
+                }
+            }
+
+            else
+            {
+                sp.Draw(imgs[12], MenuImgsRec[12], Color.White);
+            }
+
+            //newState = oldState; 
+        }
+
         // darkens bg and displays scoreboard
         public void displayScoreboard(int p, int mi, bool isPlayerDead)
         {
@@ -108,18 +280,39 @@ namespace newSpace2_5
 
             if (menuNumber < 2 && isPlayerDead == true)
             {
-                sp.DrawString(sf, "Points per kill: " + p.ToString(), new Vector2(400, 100), Color.White);
+                #region board
+                //board
+                sp.Draw(imgs[11], new Rectangle(130, 16, imgs[11].Width + 180, imgs[11].Height + 100), Color.White);
+
+                //menu btn
+                sp.Draw(imgs[12], MenuImgsRec[12], Color.White);
+
+                GameOverMainMenuBtn();
+
+                //retry btn
+                sp.Draw(imgs[13], MenuImgsRec[13], Color.White);
+
+                GameOverRetryBtn(imgs[13], MenuImgsRec[13]);
+
+                #endregion
+
+                sp.DrawString(sf, highScore.ToString(), new Vector2(240, 190), Color.White);
+
+
+                sp.DrawString(sf, p.ToString(), new Vector2(430, 110), Color.White);
 
                 if (p > mi)
                 {
                     min = CalcAcurracy(p, mi, min);
                 }
 
-                sp.DrawString(sf, "Accuracy: " + Math.Abs(min).ToString() + "%", new Vector2(400, 200), Color.Tomato);
+                sp.DrawString(sf, Math.Abs(min).ToString() + "%", new Vector2(430, 190), Color.White);
 
                 granTotal = Convert.ToInt32(Math.Abs(p * min));
 
-                sp.DrawString(sf, "Final Score: " + granTotal.ToString(), new Vector2(400, 300), Color.SteelBlue);
+                CalcHighScore();
+
+                sp.DrawString(sf, granTotal.ToString(), new Vector2(430, 270), Color.White);
             }
         }
 
@@ -141,12 +334,40 @@ namespace newSpace2_5
         //darle valor a las coordenadas de los btn
         private void placeBtns()
         {
+            #region volOpen btn
+
+            MenuImgsRec[3].X = 50;
+            MenuImgsRec[3].Y = 50;
+
+            #endregion
+
+            #region option btn
+
+            MenuImgsRec[6].X = 540;
+            MenuImgsRec[6].Y = 40;
+
+            #endregion
+
             #region arcade btn
 
-            MenuImgsRec[7].X = 30;
+            MenuImgsRec[7].X = 300;
             MenuImgsRec[7].Y = 390;
             MenuImgsRec[7].Width = 220;
             MenuImgsRec[7].Height = 30;
+
+            #endregion
+
+            #region off btn
+
+            MenuImgsRec[8].X = 250;
+            MenuImgsRec[8].Y = 50;
+
+            #endregion
+
+            #region on btn
+
+            MenuImgsRec[9].X = 180;
+            MenuImgsRec[9].Y = 50;
 
             #endregion
 
@@ -159,31 +380,21 @@ namespace newSpace2_5
 
             #endregion
 
-            #region option btn
+            #region main menu btn
 
-            MenuImgsRec[6].X = 540;
-            MenuImgsRec[6].Y = 40;
-
-            #endregion
-
-            #region volOpen btn
-
-            MenuImgsRec[3].X = 50;
-            MenuImgsRec[3].Y = 50;
+            MenuImgsRec[12].X = 417;
+            MenuImgsRec[12].Y = 323;
+            MenuImgsRec[12].Width = imgs[12].Width + 95;
+            MenuImgsRec[12].Height = imgs[12].Height + 5;
 
             #endregion
 
-            #region on btn
+            #region retry btn
 
-            MenuImgsRec[9].X = 180;
-            MenuImgsRec[9].Y = 50;
-
-            #endregion
-
-            #region off btn
-
-            MenuImgsRec[8].X = 250;
-            MenuImgsRec[8].Y = 50;
+            MenuImgsRec[13].X = 136;
+            MenuImgsRec[13].Y = 324;
+            MenuImgsRec[13].Width = imgs[12].Width + 98;
+            MenuImgsRec[13].Height = imgs[12].Height + 4;
 
             #endregion
         }
@@ -198,6 +409,7 @@ namespace newSpace2_5
             gameOverSong = s3;
         }
 
+        // plays btn sound
         public void playBtnSound()
         {
             if (soundOn)
@@ -267,7 +479,9 @@ namespace newSpace2_5
         {
             if (menuNumber == 0)
             {
-                sp.Draw(imgs[0], Vector2.Zero, Color.White);
+                //sp.Draw(imgs[0], Vector2.Zero, Color.White);
+
+                sp.Draw(imgs[0], new Rectangle(0, 0, imgs[0].Width + 40, imgs[0].Height) , Color.White);
             }
 
             else if(menuNumber == 2 || menuNumber == 3 || menuNumber == 4)
@@ -319,6 +533,9 @@ namespace newSpace2_5
             //reset hp bars
             hd.reset();
 
+            //reset esos 2 rects
+            hd.ResetResumeNReturnRects();
+
             MediaPlayer.IsRepeating = true;
         }
 
@@ -357,7 +574,7 @@ namespace newSpace2_5
         }
 
         //check si hay colision con el arcade btn
-        private void arcadeColli(HUD hd, SpaceEnemies se)
+        private void arcadeColli()
         {
             oldState = Mouse.GetState();
 
@@ -379,6 +596,8 @@ namespace newSpace2_5
                     sp.Draw(imgs[7], MenuImgsRec[7], Color.LightBlue);
 
                     hd.getScreenValue(1);
+
+                    hd.ChangeHudColors(Color.White, Color.Navy);
 
                     hasGameOverSongStarted = false;
 
@@ -410,6 +629,8 @@ namespace newSpace2_5
             {
                 sp.Draw(imgs[7], MenuImgsRec[7], Color.White);
             }
+
+            newState = oldState;
         }
 
         //check si hay colision con el campaing btn
@@ -471,7 +692,7 @@ namespace newSpace2_5
                 sp.Draw(imgs[6], MenuImgsRec[6], Color.White);
             }
 
-            newState = oldState;
+            //newState = oldState;
         }
 
         //assign text to spriteFont
@@ -609,11 +830,11 @@ namespace newSpace2_5
 
             if (mousRect.Intersects(on))
             {
-                    soundOn = true;
+                soundOn = true;
 
-                    MediaPlayer.Resume();
+                MediaPlayer.Resume();
 
-                    playBtnSound();
+                playBtnSound();
             }
 
             #endregion
@@ -622,11 +843,11 @@ namespace newSpace2_5
 
             if (mousRect.Intersects(off))
             {
-                    playBtnSound();
+                playBtnSound();
 
-                    soundOn = false;
+                soundOn = false;
 
-                    MediaPlayer.Pause();                
+                MediaPlayer.Pause();                
             }
             #endregion
         }
@@ -644,7 +865,7 @@ namespace newSpace2_5
         }
 
         //corre todos los methods de cada section de acuerdo al menuNumber
-        public void playSections(SpaceEnemies se , Map mp, bool killed, bool killed2, Texture2D[] nebImg)
+        public void playSections(SpaceEnemies se , Map mp, bool killedBig, bool killedSmall, bool killedSmallGray, Texture2D[] nebImg)
         {            
             #region main menu
 
@@ -652,11 +873,11 @@ namespace newSpace2_5
             {
                 displayMenuBg();
 
-                arcadeColli(hd, se);
+                arcadeColli();
 
-                campColli();
+                //campColli();
 
-                optColli();
+                //optColli();
             }
 
             #endregion
@@ -695,14 +916,29 @@ namespace newSpace2_5
 
                 se.SetPlayerHit(hd.setPHit());
 
+                #region small guy
                 //esta heredando imgRect para evitar null refrence error
-                hd.checkDistanceFromScreen(200, se.getEnemyImgRects()[1].Width, sp, sf, killed2);
+                hd.checkDistanceFromScreen(200, se.getEnemyImgRects()[1].Width, sp, sf, killedSmall);
 
                 getIsGameRunning(hd.setIsInGameRunning());
 
-                hd.checkDistanceFromScreen(300, se.getEnemyImgRects()[0].Width, sp, sf, killed);
+                #endregion
+
+                #region big guy
+
+                hd.checkDistanceFromScreen(300, se.getEnemyImgRects()[0].Width, sp, sf, killedBig);
 
                 getIsGameRunning(hd.setIsInGameRunning());
+
+                #endregion
+
+                #region gray small
+
+                hd.checkDistanceFromScreen(100, se.getEnemyImgRects()[2].Width, sp, sf, killedSmallGray);
+
+                getIsGameRunning(hd.setIsInGameRunning());
+
+                #endregion
             }
 
             #endregion

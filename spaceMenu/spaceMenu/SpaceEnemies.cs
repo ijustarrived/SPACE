@@ -11,13 +11,12 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 
-namespace newSpace2_5
+namespace newSpace3
 {
-    /* Notes, ideas and problems: 15/dec/2014
+    /* Notes, ideas and problems: 4/jan/2014
      * 
-     * Si le disparo al dust de un enemigo no me cuenta como miss. It should miss. No se como arreglarlo. 
-     * 
-     * Verificar que hay veces que si chocan 2 a la vez, rapido, cracked screen solo pasa una vez.
+     * Verificar que si el fx del screen crack plays y matas un enemigo mientras ese sta playing, el fx del enemy deaths no suena.
+     * En otras ocaciones el screen crack fx plays y despues el enemy death fx plays sin haber matado uno
      * 
      * se pueden: push each other si uno esta encima del otro
      * 
@@ -34,12 +33,12 @@ namespace newSpace2_5
 
         private SoundEffect enemyExplodeSound;
 
-        private Texture2D[] Imgs = new Texture2D[3];//array de imagenes de enemigos
+        private Texture2D[] Imgs = new Texture2D[9];//array de imagenes de enemigos
 
         #region rectangles
 
         private Rectangle[] imgsRec = new Rectangle[3], // tiene todos los rectangulos de cada enemigo
-                            explosionImgsRec = new Rectangle[3]; // tiene la misma imagen de explosion, 
+                            explosionImgsRec = new Rectangle[4]; // tiene la misma imagen de explosion, 
                                                                  // pero cada una esta linked a un solo enemigo. Ej: enemy[1] = explosion[1]
 
         #endregion
@@ -51,13 +50,25 @@ namespace newSpace2_5
 
         private int bigIncreaseDimesions = 0, // le deja saber cada cuanto le va a sumar al ancho y largo del enemigo
                     smallIncreaseDimesions = 0,
+                    greySmallIncreaseDimesions = 0,
+
                     enemyKilledCounter = 0, // te deja saber cuantas veces a matado a ese enemigo para luego ir mas rapido cada vez y quitar mas hp
-                    bigEnemyDmg = 31, // cuanto quita enemy 1 30 es el default
-                    smallEnemyDmg = 16, // default es 15
+
+                    bigEnemyDmg = 16, // cuanto quita enemy 1 30 es el default
+                    smallEnemyDmg = 11, // default es 15
+                    greySmallEnemyDmg = 6,
+
+                    smallGrayAniTimer = 0, // se usa para regular cuanto dura cada animation
+                    smallGrayAniPhase = 1, // te deja saber cual animation le toca
+
                     bigMaxSpeed = 5, //valor que se usa para ver cuando es que se le sube el size a la imagenes. View enemiesGetCloser for example
                     smallMaxSpeed = 5,
+                    greySmallMaxSpeed = 5,
+
                     bigAddToSize = 1, // valor que se le suma al ancho
                     smallAddToSize = 1, // valor que se le suma al ancho
+                    greySmallAddToSize = 1,
+
                     bigEnemyHp = 3, //  tiene cuanta vida tiene el enemy mas grande
                     multTimer = 110, // timer que te deja saber que el multiplier esta activo
                     ptsMult = 0, // tiene el multiplo del point multiplier
@@ -66,21 +77,32 @@ namespace newSpace2_5
 
         #endregion
 
-        private float transEnemy = 1, // valor que se multiplica al color para volver la imagen invisible
-                      transEnemy2 = 1,
+        private float transBigEnemy = 1, // valor que se multiplica al color para volver la imagen invisible
+                      transSmallEnemy = 1,
+                      transSmallGrayEnemy = 1,
                       screenVal = 0.0f; // tiene el valor de screenValue de HUD 
 
-        private Vector2[] enemyCoor = new Vector2[2],//array con coordenadas para usar para los enemigos
+        private Vector2[] enemyCoor = new Vector2[3],//array con coordenadas para usar para los enemigos
                           centerImgsOrigin = new Vector2[3]; // tiene las coodenadas del origen en el centro de cada imagen
 
         #region bools
 
         private bool isBigKilled = false, // flag que te deja saber si el enemigo grande esta muerto para empezar la animacion de muerte
                      isSmallKilled = false,
-                     playBigEnemyExplodeOnce = false, // flag que te deja saber que solo puedes play el fx una vez 
-                     playSmallEnemyExplodeOnce = false,
-                     runLines = false, // es un flag que te deja saber que solo se puede correr algo una sola vez 
-                     runLines2 = false,
+                     isGreySmallKilled = false,
+
+                     isBigEnemyExplodePlaying = false, // flag que te deja saber que solo puedes play el fx una vez 
+                     isSmallEnemyExplodePlaying = false,
+                     isSmallGrayEnemyExplodePlaying = false,
+
+                     didBigChunkRun = false, // es un flag que te deja saber que solo se puede correr ese chunk una vez
+                     didSmallChunkRun = false,
+                     didGreySmallChunkRun = false,
+
+                     isGraySmallAniRunning = true, // flag que te deja saber que los nuevos animation terminaron y se puede hacer reset al enemy
+
+                     isSmallGrayFxPlaying = false, //  flag que te deja saber si el fx esta corriendo para que no lo corra otravez 
+
                      isMultActive = false, // flag que te deja saber que se prende el multiplier
                      playerHit = false; // flag que te deja saber si le dieron al player
 
@@ -157,14 +179,19 @@ namespace newSpace2_5
         }
 
         //para enviar el valor a HUD
-        public bool GetEnemyKilled()
+        public bool GetBigEnemyKilled()
         {
             return isBigKilled;
         }
 
-        public bool GetEnemyKilled2()
+        public bool GetSmallEnemyKilled()
         {
             return isSmallKilled;
+        }
+
+        public bool GetSmallGrayKilled()
+        {
+            return isGreySmallKilled;
         }
 
         // asigna el flag para poder saber si le dieron al player para play el screencrack animation
@@ -184,9 +211,12 @@ namespace newSpace2_5
             imgsRec[0].X = (int)enemyCoor[0].X;
             imgsRec[0].Y = (int)enemyCoor[0].Y;
 
-            transEnemy = 1;
+            transBigEnemy = 1;
 
             bigEnemyHp = 3;
+
+            bigGuyColor.G = 255;
+            bigGuyColor.B = 255;
         }
 
         public void resetSmallGuy()
@@ -199,7 +229,22 @@ namespace newSpace2_5
             imgsRec[1].X = (int)enemyCoor[1].X;
             imgsRec[1].Y = (int)enemyCoor[1].Y;
 
-            transEnemy2 = 1;
+            transSmallEnemy = 1;
+        }
+
+        public void ResetSmallGray()
+        {
+            imgsRec[2].Width = 0;
+            imgsRec[2].Height = 0;
+
+            randomizeCoor();
+
+            imgsRec[2].X = (int)enemyCoor[2].X;
+            imgsRec[2].Y = (int)enemyCoor[2].Y;
+
+            transSmallGrayEnemy = 1;
+
+            isSmallGrayFxPlaying = false;
         }
 
         /* Method documentation
@@ -214,13 +259,21 @@ namespace newSpace2_5
 
             resetSmallGuy();
 
+            ResetSmallGray();
+
             bigMaxSpeed = 5;
 
             smallMaxSpeed = 5;
 
+            greySmallMaxSpeed = 5;
+
             bigAddToSize = 1;
 
             smallAddToSize = 1;
+
+            greySmallAddToSize = 1;
+
+            bigEnemyHp = 3;
         }
 
         //regresa el array de rect para verificar si algun enemifo esta serca del screen
@@ -238,21 +291,21 @@ namespace newSpace2_5
             {
                 if (!playerHit)
                 {
-                    hd.PlaySound(ref playBigEnemyExplodeOnce, enemyExplodeSound);
+                    hd.PlaySound(ref isBigEnemyExplodePlaying, enemyExplodeSound);
                 }
 
-                if (transEnemy > 0)
+                if (transBigEnemy > 0)
                 {
                     //sp.Draw(Imgs[2], imgsRec[0], null, Color.White * transEnemy, 0, centerImgsOrigin[2], SpriteEffects.None, 0);
 
-                    sp.Draw(Imgs[2], imgsRec[0], Color.White * transEnemy);
+                    sp.Draw(Imgs[2], imgsRec[0], Color.White * transBigEnemy);
 
-                    transEnemy -= 0.015f;
+                    transBigEnemy -= 0.015f;
                 }
 
                 else
                 {
-                    playBigEnemyExplodeOnce = false;
+                    isBigEnemyExplodePlaying = false;
 
                     isBigKilled = false;
 
@@ -268,27 +321,140 @@ namespace newSpace2_5
             {
                 if (!playerHit)
                 {
-                    hd.PlaySound(ref playSmallEnemyExplodeOnce, enemyExplodeSound);
+                    hd.PlaySound(ref isSmallEnemyExplodePlaying, enemyExplodeSound);
                 }
 
-                if (transEnemy2 > 0)
+                if (transSmallEnemy > 0)
                 {
                     //sp.Draw(Imgs[2], imgsRec[1], null, Color.White * transEnemy2, 0, centerImgsOrigin[2], SpriteEffects.None, 0);
-                    //color * trans lo hace invisible
+                    //"color * trans" lo hace invisible
 
-                    sp.Draw(Imgs[2], imgsRec[1], Color.White * transEnemy2);
+                    sp.Draw(Imgs[2], imgsRec[1], Color.White * transSmallEnemy);
 
-                    transEnemy2 -= 0.015f;
+                    transSmallEnemy -= 0.015f;
                 }
 
                 else
                 {
-                    playSmallEnemyExplodeOnce = false;
+                    isSmallEnemyExplodePlaying = false;
 
                     isSmallKilled = false;
 
                     resetSmallGuy();
                 }
+            }
+
+            #endregion
+
+            #region small gray
+
+            if (isGreySmallKilled)
+            {
+                if ((!playerHit) && (!isSmallGrayFxPlaying))
+                {
+                    isSmallGrayFxPlaying = true;
+
+                    hd.PlaySound(ref isSmallGrayEnemyExplodePlaying, enemyExplodeSound);
+                }
+
+                if (isGraySmallAniRunning)
+                {
+                    #region p1
+
+                    if (smallGrayAniTimer < 7 && smallGrayAniPhase == 1)
+                    {
+                        sp.Draw(Imgs[4], imgsRec[2], Color.White);
+
+                        smallGrayAniTimer++;
+                    }
+
+                    else if (smallGrayAniTimer >= 7 && smallGrayAniPhase == 1)
+                    {
+                        smallGrayAniTimer++;
+
+                        smallGrayAniPhase++;
+                    }
+
+                    #endregion
+
+                    #region p2
+
+                    if (smallGrayAniTimer < 14 && smallGrayAniPhase == 2)
+                    {
+                        sp.Draw(Imgs[5], imgsRec[2], Color.White);
+
+                        smallGrayAniTimer++;
+                    }
+
+                    else if (smallGrayAniTimer >= 14 && smallGrayAniPhase == 2)
+                    {
+                        smallGrayAniTimer++;
+
+                        smallGrayAniPhase++;
+                    }
+
+                    #endregion
+
+                    #region p3
+
+                    //if (smallGrayAniTimer < 30 && smallGrayAniPhase == 3)
+                    //{
+                    //    sp.Draw(Imgs[6], imgsRec[2], Color.White);
+
+                    //    smallGrayAniTimer++;
+                    //}
+
+                    else if (transSmallGrayEnemy > 0)
+                    {
+                        //sp.Draw(Imgs[2], imgsRec[1], null, Color.White * transEnemy2, 0, centerImgsOrigin[2], SpriteEffects.None, 0);
+                        //"color * trans" lo hace invisible
+
+                        sp.Draw(Imgs[6], imgsRec[2], Color.White * transSmallGrayEnemy);
+
+                        transSmallGrayEnemy -= 0.015f;
+                    }
+
+                    else if (transSmallGrayEnemy < 0)
+                    {
+                        smallGrayAniTimer = 0;
+
+                        smallGrayAniPhase = 1;
+
+                        isGraySmallAniRunning = false;
+
+                        isSmallGrayEnemyExplodePlaying = false;
+
+                        isGreySmallKilled = false;
+
+                        ResetSmallGray();
+                    }
+
+                    //else if (smallGrayAniTimer >= 30 && smallGrayAniPhase == 3) 
+                    //{
+                    //    smallGrayAniTimer = 0;
+
+                    //    smallGrayAniPhase = 1;
+
+                    //    isGraySmallAniRunning = false;
+                    //}
+
+                    #endregion
+                }
+
+                //else
+                //{
+                //    smallGrayAniTimer = 0;
+
+                //    smallGrayAniPhase = 1;
+
+                //    isGraySmallAniRunning = false;
+
+                //    playSmallEnemyExplodeOnce = false;
+
+                //    isGreySmallKilled = false;
+
+                //    ResetSmallGray();
+                //}
             }
 
             #endregion
@@ -383,6 +549,29 @@ namespace newSpace2_5
             }   
         }
 
+        public void GreySmallGuyMovesFaster()
+        {
+            if (greySmallAddToSize < 8)
+            {
+                if (greySmallMaxSpeed >= 2)
+                {
+                    greySmallMaxSpeed--;
+                }
+
+                else
+                {
+                    greySmallAddToSize++;
+
+                    greySmallMaxSpeed = 4;
+                }
+            }
+
+            else if (greySmallAddToSize < 25)
+            {
+                greySmallAddToSize++;
+            }
+        }
+
         /*
          * regula cuan rapido crece cada imagen menor el # de increaseEnemy mas rapido crece, pero a mayor el width y el
          * height, tambien mas rapido crece.
@@ -393,15 +582,11 @@ namespace newSpace2_5
 
             if (imgsRec[0].Width < 300)
             {
-                runLines = true;              
+                didBigChunkRun = true;              
 
                 if (bigIncreaseDimesions == bigMaxSpeed)
                 {
                     imgsRec[0].Inflate(bigAddToSize, bigAddToSize);
-
-                    //imgsRec[0].Width += bigAddToWidth;
-
-                    //imgsRec[0].Height += bigAddToWidth;
 
                     bigIncreaseDimesions = 0;
                 }
@@ -422,8 +607,10 @@ namespace newSpace2_5
             {
                 if (!isBigKilled)
                 {
-                    if (runLines)
+                    if (didBigChunkRun)
                     {
+                        MissedAShot();
+
                         playerHit = true;
 
                         isMultActive = false;
@@ -447,7 +634,7 @@ namespace newSpace2_5
 
                         screenVal = 1;
 
-                        runLines = false;
+                        didBigChunkRun = false;
 
                         BigGuyMovesFaster();
                     }
@@ -461,7 +648,7 @@ namespace newSpace2_5
 
             if (imgsRec[1].Width < 200)
             {
-                runLines2 = true;
+                didSmallChunkRun = true;
 
                 if (smallIncreaseDimesions == smallMaxSpeed)
                 {
@@ -491,8 +678,10 @@ namespace newSpace2_5
                 // sino esta muerto el enemigo, entres al warning seccion
                 if (!isSmallKilled)
                 {
-                    if (runLines2)
+                    if (didSmallChunkRun)
                     {
+                        MissedAShot();
+
                         playerHit = true;
 
                         isMultActive = false;
@@ -516,9 +705,76 @@ namespace newSpace2_5
 
                         //regula el speed de acuerdo a la muerte de los enemigos
 
-                        runLines2 = false;
+                        didSmallChunkRun = false;
 
                         SmallGuyMovesFaster();
+                    }
+                }
+            }
+
+            #endregion
+
+            #region greyman small
+
+            if (imgsRec[2].Width < 100)
+            {
+                didGreySmallChunkRun = true;
+
+                if (greySmallIncreaseDimesions == greySmallMaxSpeed)
+                {
+                    imgsRec[2].Inflate(greySmallAddToSize, greySmallAddToSize);
+
+                    greySmallIncreaseDimesions = 0;
+                }
+
+                else if (greySmallIncreaseDimesions < greySmallMaxSpeed)
+                {
+                    greySmallIncreaseDimesions += 1;
+                }
+
+                else
+                {
+                    greySmallIncreaseDimesions = 0;
+                }
+            }
+
+            else
+            {
+                // sino esta muerto el enemigo, entres al warning seccion
+                if (!isGreySmallKilled)
+                {
+                    if (didGreySmallChunkRun)
+                    {
+                        MissedAShot();
+
+                        playerHit = true;
+
+                        isGraySmallAniRunning = true;
+
+                        isMultActive = false;
+
+                        hd.calcPlayerHp(greySmallEnemyDmg, sp);
+
+                        isGreySmallKilled = true;
+
+                        if (enemyKilledCounter < 2)
+                        {
+                            enemyKilledCounter++;
+                        }
+
+                        else
+                        {
+                            enemyKilledCounter = 0;
+                        }
+
+                        // default es 10
+                        greySmallEnemyDmg += 5;
+
+                        //regula el speed de acuerdo a la muerte de los enemigos
+
+                        didGreySmallChunkRun = false;
+
+                        GreySmallGuyMovesFaster();
                     }
                 }
             }
@@ -582,7 +838,7 @@ namespace newSpace2_5
 
                 multTimer = 110;
 
-                if (ptsMult < 60)
+                if (ptsMult < 81)
                 {
                     ptsMult += 20;
                 }
@@ -622,8 +878,17 @@ namespace newSpace2_5
             }
         }
 
+        // called everytime you miss
+        public void MissedAShot()
+        {
+            misShots++;
+
+            ResetMult();
+        }
+
         // verifica colision de meteoro grande
-        public void BigCollision(Rectangle bigEnemyRec, Rectangle smallEnemyRect, Rectangle crosshairRect, Rectangle pauseImgRect, Rectangle mouseRect)
+        public void BigCollision(Rectangle bigEnemyRec, Rectangle grayEnemyRect, Rectangle smallEnemyRect, Rectangle crosshairRect, Rectangle pauseImgRect,
+                                 Rectangle mouseRect)
         {
             if (crosshairRect.Intersects(bigEnemyRec))
             {
@@ -640,7 +905,7 @@ namespace newSpace2_5
 
                     else
                     {
-                        pts += 10;
+                        pts += 15;
 
                         pts += ptsMult;
 
@@ -652,8 +917,7 @@ namespace newSpace2_5
 
                         CalcMultMultiplo();
 
-                        //default es 20
-                        bigEnemyDmg += 20;
+                        bigEnemyDmg += 15;
 
                         BigGuyMovesFaster();
                     }
@@ -666,34 +930,27 @@ namespace newSpace2_5
                 //Para eso esta este si no esta muerto, verifica eso, si esta muerto, vete directo al else.
                
                     //si dispara no choca con el grande y tampoco con el small one
-                if (!(crosshairRect.Intersects(smallEnemyRect)))
+                if ((!(crosshairRect.Intersects(smallEnemyRect))) && (!(crosshairRect.Intersects(grayEnemyRect))))
                 {
-                    misShots++;
-
-                    ResetMult();
+                    MissedAShot();
                 }
-                
 
-                //else
+                //if (!(crosshairRect.Intersects(grayEnemyRect)))
                 //{
-                //    if (isSmallKilled)
-                //    {
-                //        misShots++;
-
-                //        ResetMult();
-                //    }
+                //    MissedAShot();
                 //}
             }
         }
 
         //verifica colision de enemigo pequeño
-        public void SmallCollision(Rectangle smallEnemyRec, Rectangle bigEnemyRect, Rectangle crosshairRect, Rectangle pauseImgRect, Rectangle mouseRect)
+        public void SmallCollision(Rectangle smallEnemyRec, Rectangle grayEnemyRect, Rectangle bigEnemyRect, Rectangle crosshairRect, Rectangle pauseImgRect, 
+                                   Rectangle mouseRect)
         {
             if (crosshairRect.Intersects(smallEnemyRec))
             {
                 if (!mouseRect.Intersects(pauseImgRect))
                 {
-                    pts += 5;
+                    pts += 10;
 
                     pts += ptsMult;
 
@@ -713,23 +970,55 @@ namespace newSpace2_5
             else
             {                
                 //si dispara no choca con el grande y tampoco con el small one
-                if (!(crosshairRect.Intersects(bigEnemyRect)))
+                if ((!(crosshairRect.Intersects(bigEnemyRect))) && (!(crosshairRect.Intersects(grayEnemyRect))))
                 {
-                    misShots++;
-
-                    ResetMult();
+                    MissedAShot();
                 }
-                
 
-                //else
+                //if (!(crosshairRect.Intersects(grayEnemyRect)))
                 //{
-                //    if (isBigKilled)
-                //    {
-                //        misShots++;
+                //    MissedAShot();
+                //}
+            }
+        }
 
-                //        ResetMult();
-                //    }
-                    
+        //verifica colision de enemigo pequeño griz
+        public void SmallGrayColli(Rectangle grayEnemyRect, Rectangle smallEnemyRec, Rectangle bigEnemyRect, Rectangle crossRect, Rectangle pauseImgRect, 
+                                   Rectangle mouseRect)
+        {
+            if (crossRect.Intersects(grayEnemyRect))
+            {
+                if (!mouseRect.Intersects(pauseImgRect))
+                {
+                    pts += 5;
+
+                    pts += ptsMult;
+
+                    isMultActive = true;
+
+                    CalcMultMultiplo();
+
+                    greySmallEnemyDmg += 5;
+
+                    isGreySmallKilled = true;
+
+                    isGraySmallAniRunning = true;
+
+                    GreySmallGuyMovesFaster();
+                }
+            }
+
+            else
+            {
+                //si dispara no choca con el grande y tampoco con el small one
+                if ((!(crossRect.Intersects(bigEnemyRect))) && (!(crossRect.Intersects(smallEnemyRec))))
+                {
+                    MissedAShot();
+                }
+
+                //if (!(crossRect.Intersects(smallEnemyRec)))
+                //{
+                //    MissedAShot();
                 //}
             }
         }
@@ -739,25 +1028,31 @@ namespace newSpace2_5
         {
             if (!isSmallKilled)
             {
-                SmallCollision(enemyRect[1], enemyRect[0], crosshiarRect, pauseImgRect, mouseRect);
+                SmallCollision(enemyRect[1], enemyRect[2], enemyRect[0], crosshiarRect, pauseImgRect, mouseRect);
             }
 
             if (!isBigKilled)
             {
-                BigCollision(enemyRect[0], enemyRect[1], crosshiarRect, pauseImgRect, mouseRect);
+                BigCollision(enemyRect[0], enemyRect[2], enemyRect[1], crosshiarRect, pauseImgRect, mouseRect);
+            }
+
+            if (!isGreySmallKilled)
+            {
+                SmallGrayColli(enemyRect[2], enemyRect[1], enemyRect[0], crosshiarRect, pauseImgRect, mouseRect);
             }
         }
 
         //desplega las imagenes de los enemigos y death animation
         public void displayImgs(SpriteBatch sp, SpriteFont sf)
         {
-            sp.DrawString(sf, "multiplo: " + ptsMult.ToString(), new Vector2(100, 100), Color.Yellow);
+            //sp.DrawString(sf, "smallGrayAniPhase: " + isGreySmallKilled.ToString(), new Vector2(100, 100), Color.Yellow);
 
-            sp.DrawString(sf, "timer: " + multTimer.ToString(), new Vector2(100, 200), Color.Yellow);
+            //sp.DrawString(sf, "transSmallGrayEnemy: " + transSmallGrayEnemy.ToString(), new Vector2(100, 200), Color.Yellow);
 
-            sp.DrawString(sf, "isMultiActive: " + isMultActive.ToString(), new Vector2(100, 300), Color.Yellow);
+            //sp.DrawString(sf, "smallGrayAniTimer: " + smallGrayAniTimer.ToString(), new Vector2(100, 300), Color.Yellow);
+            
+            #region display big meteor
 
-            //display big meteor
             if (!isBigKilled)
             {
                 //sp.Draw(Imgs[0], imgsRec[0], null, Color.White, 0, centerImgsOrigin[0], SpriteEffects.None, 0);
@@ -770,7 +1065,10 @@ namespace newSpace2_5
                 playEnemyDeathAnimation(sp);
             }
 
-            //display small guy
+            #endregion
+
+            #region display small guy
+
             if (!isSmallKilled)
             {
                 //sp.Draw(Imgs[1], imgsRec[1], null, Color.White, 0, centerImgsOrigin[1], SpriteEffects.None, 0);
@@ -782,6 +1080,24 @@ namespace newSpace2_5
             {
                 playEnemyDeathAnimation(sp);
             }
+
+            #endregion
+
+            #region display grey small
+
+            if (!isGreySmallKilled)
+            {
+                //sp.Draw(Imgs[1], imgsRec[1], null, Color.White, 0, centerImgsOrigin[1], SpriteEffects.None, 0);
+
+                sp.Draw(Imgs[3], imgsRec[2], null, Color.White);
+            }
+
+            else
+            {
+                playEnemyDeathAnimation(sp);
+            }
+
+            #endregion
         }
     }
 }

@@ -15,4 +15,9 @@ C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 2.2\spaceMenu\sp
 C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 2.3\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
 C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 2.4\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
 C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 2.5\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
-C:\Users\DevilDesk\Documents\GitHub\SPACE\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\newSpaceContent.contentprojResolveAssemblyReference.cache
+C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 2.6\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 2.7\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 2.8\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 2.8\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\newSpaceContent.contentprojResolveAssemblyReference.cache
+C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 2.9\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\newSpaceContent.contentprojResolveAssemblyReference.cache
+C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\newSpaceContent.contentprojResolveAssemblyReference.cache
