@@ -11,14 +11,10 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 
-namespace newSpace3
+namespace newSpace3_2
 {
-    /* Notes, ideas and problems: 4/jan/2014
+    /* Notes, ideas and problems: 7/jan/2014
      * 
-     * Verificar que si el fx del screen crack plays y matas un enemigo mientras ese sta playing, el fx del enemy deaths no suena.
-     * En otras ocaciones el screen crack fx plays y despues el enemy death fx plays sin haber matado uno
-     * 
-     * se pueden: push each other si uno esta encima del otro
      * 
      */
 
@@ -27,7 +23,8 @@ namespace newSpace3
     {
         #region variables
 
-        private Color bigGuyColor = Color.White;
+        private Color bigGuyColor = Color.White, // tiene el color del big y small guy por que son los unicos que cambian con hits
+            smallGuyColor = Color.White;
 
         private HUD hd;
 
@@ -70,6 +67,8 @@ namespace newSpace3
                     greySmallAddToSize = 1,
 
                     bigEnemyHp = 3, //  tiene cuanta vida tiene el enemy mas grande
+                    smallEnemyHp = 1,
+
                     multTimer = 110, // timer que te deja saber que el multiplier esta activo
                     ptsMult = 0, // tiene el multiplo del point multiplier
                     pts = 0, // points
@@ -215,8 +214,10 @@ namespace newSpace3
 
             bigEnemyHp = 3;
 
-            bigGuyColor.G = 255;
-            bigGuyColor.B = 255;
+            bigGuyColor = Color.White;
+
+            //bigGuyColor.G = 255;
+            //bigGuyColor.B = 255;
         }
 
         public void resetSmallGuy()
@@ -230,6 +231,14 @@ namespace newSpace3
             imgsRec[1].Y = (int)enemyCoor[1].Y;
 
             transSmallEnemy = 1;
+
+            smallEnemyHp = 1;
+
+            smallGuyColor = Color.White;
+
+            //smallguyColor.G = 255;
+
+            //smallguyColor.B = 255;
         }
 
         public void ResetSmallGray()
@@ -274,6 +283,8 @@ namespace newSpace3
             greySmallAddToSize = 1;
 
             bigEnemyHp = 3;
+
+            smallEnemyHp = 1;
         }
 
         //regresa el array de rect para verificar si algun enemifo esta serca del screen
@@ -289,10 +300,10 @@ namespace newSpace3
 
             if (isBigKilled)
             {
-                if (!playerHit)
-                {
-                    hd.PlaySound(ref isBigEnemyExplodePlaying, enemyExplodeSound);
-                }
+                //if (!playerHit)
+                //{
+                //    hd.PlaySound(ref isBigEnemyExplodePlaying, enemyExplodeSound);
+                //}
 
                 if (transBigEnemy > 0)
                 {
@@ -319,10 +330,10 @@ namespace newSpace3
 
             if (isSmallKilled)
             {
-                if (!playerHit)
-                {
-                    hd.PlaySound(ref isSmallEnemyExplodePlaying, enemyExplodeSound);
-                }
+                //if (!playerHit)
+                //{
+                //    hd.PlaySound(ref isSmallEnemyExplodePlaying, enemyExplodeSound);
+                //}
 
                 if (transSmallEnemy > 0)
                 {
@@ -494,6 +505,114 @@ namespace newSpace3
                     enemyCoor[i] = new Vector2(rand2.Next(80, 726), allEnemyCoorY[rand2.Next(0, allEnemyCoorY.Length)]);
                 }
             }
+        }
+
+        // verifica que ninguno enemy spawn in collition range de cada uno. If so run randomizer again
+        public void CheckPositionsAfterRand()
+        {
+            #region big guy and small guy
+
+            if (imgsRec[0].Intersects(imgsRec[1]))
+            {
+                if (imgsRec[0].Width < imgsRec[1].Width)
+                {
+                    randomizeCoor();
+
+                    imgsRec[0].X = (int)enemyCoor[0].X;
+
+                    imgsRec[0].Y = (int)enemyCoor[0].Y;
+                }
+                else
+                {
+                    randomizeCoor();
+
+                    imgsRec[1].X = (int)enemyCoor[1].X;
+
+                    imgsRec[1].Y = (int)enemyCoor[1].Y;
+                }
+            }
+
+            else if (imgsRec[0].Intersects(imgsRec[2]))
+            {
+                if (imgsRec[0].Width < imgsRec[2].Width)
+                {
+                    randomizeCoor();
+
+                    imgsRec[0].X = (int)enemyCoor[0].X;
+
+                    imgsRec[0].Y = (int)enemyCoor[0].Y;
+                }
+                else
+                {
+                    randomizeCoor();
+
+                    imgsRec[2].X = (int)enemyCoor[2].X;
+
+                    imgsRec[2].Y = (int)enemyCoor[2].Y;
+                }
+            }
+
+            #endregion
+
+            //if (imgsRec[1].Intersects(imgsRec[0]))
+            //{
+            //    if (imgsRec[0].Width < imgsRec[1].Width)
+            //    randomizeCoor();
+
+            //    imgsRec[1].X = (int)enemyCoor[1].X;
+
+            //    imgsRec[1].Y = (int)enemyCoor[1].Y;
+            //}
+
+            #region small guy and small gray guy
+
+            if (imgsRec[1].Intersects(imgsRec[2]))
+            {
+                if (imgsRec[1].Width < imgsRec[2].Width)
+                {
+                    randomizeCoor();
+
+                    imgsRec[1].X = (int)enemyCoor[1].X;
+
+                    imgsRec[1].Y = (int)enemyCoor[1].Y;
+                }
+
+                else
+                {
+                    randomizeCoor();
+
+                    imgsRec[2].X = (int)enemyCoor[2].X;
+
+                    imgsRec[2].Y = (int)enemyCoor[2].Y;
+                }
+            }
+
+            #endregion
+
+            #region small gray and big guy
+
+            if (imgsRec[2].Intersects(imgsRec[0]))
+            {
+                if (imgsRec[2].Width < imgsRec[0].Width)
+                {
+                    randomizeCoor();
+
+                    imgsRec[2].X = (int)enemyCoor[2].X;
+
+                    imgsRec[2].Y = (int)enemyCoor[2].Y;
+                }
+
+                else
+                {
+                    randomizeCoor();
+
+                    imgsRec[0].X = (int)enemyCoor[0].X;
+
+                    imgsRec[0].Y = (int)enemyCoor[0].Y;
+                }
+            }
+
+            #endregion
         }
 
         //le suma uno al ancho y el largo para dar la impresion que se estan acercando, si le dan a player, brende el flag de hit
@@ -905,6 +1024,8 @@ namespace newSpace3
 
                     else
                     {
+                        hd.PlaySound(enemyExplodeSound);
+
                         pts += 15;
 
                         pts += ptsMult;
@@ -950,20 +1071,33 @@ namespace newSpace3
             {
                 if (!mouseRect.Intersects(pauseImgRect))
                 {
-                    pts += 10;
+                    if (smallEnemyHp > 0)
+                    {
+                        smallEnemyHp--;
 
-                    pts += ptsMult;
+                        smallGuyColor.B -= 100;
 
-                    isMultActive = true;
+                        smallGuyColor.G -= 100;
+                    }
+                    else
+                    {
+                        hd.PlaySound(enemyExplodeSound);
 
-                    CalcMultMultiplo();
+                        pts += 10;
 
-                    // default es 10
-                    smallEnemyDmg += 10;
+                        pts += ptsMult;
 
-                    isSmallKilled = true;
+                        isMultActive = true;
 
-                    SmallGuyMovesFaster();
+                        CalcMultMultiplo();
+
+                        // default es 10
+                        smallEnemyDmg += 10;
+
+                        isSmallKilled = true;
+
+                        SmallGuyMovesFaster();
+                    }
                 }
             }
 
@@ -990,6 +1124,8 @@ namespace newSpace3
             {
                 if (!mouseRect.Intersects(pauseImgRect))
                 {
+                    hd.PlaySound(enemyExplodeSound);
+
                     pts += 5;
 
                     pts += ptsMult;
@@ -1073,7 +1209,7 @@ namespace newSpace3
             {
                 //sp.Draw(Imgs[1], imgsRec[1], null, Color.White, 0, centerImgsOrigin[1], SpriteEffects.None, 0);
 
-                sp.Draw(Imgs[1], imgsRec[1], null, Color.White);
+                sp.Draw(Imgs[1], imgsRec[1], null, smallGuyColor);
             }
 
             else

@@ -6,7 +6,7 @@ using System.Text;
 using System.IO.IsolatedStorage;
 using System.IO;
 
-namespace newSpace3
+namespace newSpace3_2
 {
     class LoadNSave
     {

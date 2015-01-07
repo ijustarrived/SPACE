@@ -6,8 +6,8 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("newSpace 3")]
-[assembly: AssemblyProduct("newSpace 3")]
+[assembly: AssemblyTitle("newSpace 3.2")]
+[assembly: AssemblyProduct("newSpace 3.2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyCopyright("Copyright © Retro Roots 2012")]

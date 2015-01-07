@@ -7,8 +7,8 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\backToSpace.xnb</Output>
-      <Extra>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\backToSpace.wma</Extra>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\backToSpace.xnb</Output>
+      <Extra>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\backToSpace.wma</Extra>
       <Time>2014-11-09T19:46:36-04:00</Time>
     </Item>
     <Item>
@@ -17,8 +17,8 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\spaceSurv.xnb</Output>
-      <Extra>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\spaceSurv.wma</Extra>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\spaceSurv.xnb</Output>
+      <Extra>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\spaceSurv.wma</Extra>
       <Time>2014-11-18T13:24:25-04:00</Time>
     </Item>
     <Item>
@@ -27,8 +27,8 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\gameOver.xnb</Output>
-      <Extra>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\gameOver.wma</Extra>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\gameOver.xnb</Output>
+      <Extra>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\gameOver.wma</Extra>
       <Time>2014-12-08T14:18:32-04:00</Time>
     </Item>
     <Item>
@@ -37,7 +37,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\volClosed.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\volClosed.xnb</Output>
       <Time>2014-11-09T19:48:05-04:00</Time>
     </Item>
     <Item>
@@ -46,7 +46,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\volOpen.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\volOpen.xnb</Output>
       <Time>2014-11-09T19:48:03-04:00</Time>
     </Item>
     <Item>
@@ -55,7 +55,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\menuBtn.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\menuBtn.xnb</Output>
       <Time>2014-11-09T19:47:46-04:00</Time>
     </Item>
     <Item>
@@ -64,7 +64,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\missionSel.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\missionSel.xnb</Output>
       <Time>2014-11-09T19:47:40-04:00</Time>
     </Item>
     <Item>
@@ -73,7 +73,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\optionBtn.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\optionBtn.xnb</Output>
       <Time>2014-11-09T19:47:36-04:00</Time>
     </Item>
     <Item>
@@ -82,7 +82,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\arcadeBtn.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\arcadeBtn.xnb</Output>
       <Time>2014-11-09T19:48:23-04:00</Time>
     </Item>
     <Item>
@@ -91,7 +91,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\campBtn.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\campBtn.xnb</Output>
       <Time>2014-11-09T19:48:20-04:00</Time>
     </Item>
     <Item>
@@ -100,7 +100,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\optBG.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\optBG.xnb</Output>
       <Time>2014-11-09T19:47:56-04:00</Time>
     </Item>
     <Item>
@@ -109,7 +109,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\Cracked_glass.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\Cracked_glass.xnb</Output>
       <Time>2014-11-09T19:48:18-04:00</Time>
     </Item>
     <Item>
@@ -118,7 +118,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\off.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\off.xnb</Output>
       <Time>2014-11-09T19:47:32-04:00</Time>
     </Item>
     <Item>
@@ -127,7 +127,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\on.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\on.xnb</Output>
       <Time>2014-11-09T19:47:30-04:00</Time>
     </Item>
     <Item>
@@ -136,7 +136,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\EnemyPics\Explosion.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\EnemyPics\Explosion.xnb</Output>
       <Time>2014-11-09T19:46:48-04:00</Time>
     </Item>
     <Item>
@@ -145,7 +145,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\EnemyPics\meteor2.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\EnemyPics\meteor2.xnb</Output>
       <Time>2014-11-09T19:46:43-04:00</Time>
     </Item>
     <Item>
@@ -154,7 +154,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\EnemyPics\meteor.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\EnemyPics\meteor.xnb</Output>
       <Time>2014-11-09T19:46:40-04:00</Time>
     </Item>
     <Item>
@@ -163,7 +163,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\cracked.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\cracked.xnb</Output>
       <Time>2014-11-09T19:47:09-04:00</Time>
     </Item>
     <Item>
@@ -172,7 +172,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\hpBotLayer.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\hpBotLayer.xnb</Output>
       <Time>2014-11-09T19:47:05-04:00</Time>
     </Item>
     <Item>
@@ -181,7 +181,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\hpTopLayer.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\hpTopLayer.xnb</Output>
       <Time>2014-11-09T19:47:02-04:00</Time>
     </Item>
     <Item>
@@ -190,7 +190,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\Pause.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\Pause.xnb</Output>
       <Time>2014-11-09T19:46:54-04:00</Time>
     </Item>
     <Item>
@@ -199,7 +199,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\enemyBar.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\enemyBar.xnb</Output>
       <Time>2014-11-09T19:46:51-04:00</Time>
     </Item>
     <Item>
@@ -208,7 +208,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\MapImgs\Fin_pause_screen.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\MapImgs\Fin_pause_screen.xnb</Output>
       <Time>2014-11-09T19:47:25-04:00</Time>
     </Item>
     <Item>
@@ -217,7 +217,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\MapImgs\bigNeb.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\MapImgs\bigNeb.xnb</Output>
       <Time>2014-11-09T20:12:51-04:00</Time>
     </Item>
     <Item>
@@ -226,7 +226,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\Crosshair.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\Crosshair.xnb</Output>
       <Time>2014-11-15T13:09:20-04:00</Time>
     </Item>
     <Item>
@@ -235,7 +235,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\shotImg.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\shotImg.xnb</Output>
       <Time>2014-11-15T18:08:58-04:00</Time>
     </Item>
     <Item>
@@ -244,7 +244,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\X2.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\X2.xnb</Output>
       <Time>2014-12-30T13:59:26-04:00</Time>
     </Item>
     <Item>
@@ -253,7 +253,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\X4.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\X4.xnb</Output>
       <Time>2014-12-30T13:59:26-04:00</Time>
     </Item>
     <Item>
@@ -262,7 +262,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\X6.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\X6.xnb</Output>
       <Time>2014-12-30T13:59:26-04:00</Time>
     </Item>
     <Item>
@@ -271,7 +271,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\X8.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\X8.xnb</Output>
       <Time>2014-12-30T13:59:26-04:00</Time>
     </Item>
     <Item>
@@ -280,7 +280,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\menuBG.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\menuBG.xnb</Output>
       <Time>2014-12-30T14:29:38-04:00</Time>
     </Item>
     <Item>
@@ -289,7 +289,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\EnemyPics\greyMan3Explo1.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\EnemyPics\greyMan3Explo1.xnb</Output>
       <Time>2014-12-30T15:16:54-04:00</Time>
     </Item>
     <Item>
@@ -298,7 +298,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\EnemyPics\greyMan3Explo2.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\EnemyPics\greyMan3Explo2.xnb</Output>
       <Time>2014-12-30T15:16:54-04:00</Time>
     </Item>
     <Item>
@@ -307,7 +307,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\EnemyPics\greyman3Explo3.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\EnemyPics\greyman3Explo3.xnb</Output>
       <Time>2014-12-30T15:16:54-04:00</Time>
     </Item>
     <Item>
@@ -316,7 +316,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\GameOver.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\GameOver.xnb</Output>
       <Time>2014-12-30T16:10:27-04:00</Time>
     </Item>
     <Item>
@@ -325,7 +325,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\mainMenuBtn.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\mainMenuBtn.xnb</Output>
       <Time>2014-12-30T18:04:49-04:00</Time>
     </Item>
     <Item>
@@ -334,7 +334,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\retryBtn.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\pictures\retryBtn.xnb</Output>
       <Time>2014-12-30T18:04:49-04:00</Time>
     </Item>
     <Item>
@@ -343,7 +343,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\GamePaused.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\GamePaused.xnb</Output>
       <Time>2014-12-30T19:45:24-04:00</Time>
     </Item>
     <Item>
@@ -352,7 +352,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\frame.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\frame.xnb</Output>
       <Time>2014-12-30T19:46:05-04:00</Time>
     </Item>
     <Item>
@@ -361,7 +361,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\return.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\return.xnb</Output>
       <Time>2015-01-02T21:00:27.683184-04:00</Time>
     </Item>
     <Item>
@@ -370,7 +370,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\Resume.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\Resume.xnb</Output>
       <Time>2014-12-30T21:16:12-04:00</Time>
     </Item>
     <Item>
@@ -379,7 +379,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\vOpen.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\vOpen.xnb</Output>
       <Time>2015-01-02T21:05:40.3630682-04:00</Time>
     </Item>
     <Item>
@@ -388,7 +388,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\OFF.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\OFF.xnb</Output>
       <Time>2014-12-30T22:06:40-04:00</Time>
     </Item>
     <Item>
@@ -397,7 +397,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\ON.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\ON.xnb</Output>
       <Time>2014-12-30T22:06:53-04:00</Time>
     </Item>
     <Item>
@@ -406,7 +406,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\Retry.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\HUDpics\Retry.xnb</Output>
       <Time>2014-12-30T23:21:17-04:00</Time>
     </Item>
     <Item>
@@ -415,7 +415,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\EnemyPics\greymanSmall.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\EnemyPics\greymanSmall.xnb</Output>
       <Time>2015-01-02T21:25:09.3489304-04:00</Time>
     </Item>
     <Item>
@@ -424,7 +424,7 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\btnSound.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\btnSound.xnb</Output>
       <Time>2014-11-09T19:45:48-04:00</Time>
     </Item>
     <Item>
@@ -433,7 +433,7 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\Shoot3.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\Shoot3.xnb</Output>
       <Time>2014-11-18T13:25:47-04:00</Time>
     </Item>
     <Item>
@@ -442,7 +442,7 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\screenHit.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\screenHit.xnb</Output>
       <Time>2014-11-18T13:27:00-04:00</Time>
     </Item>
     <Item>
@@ -451,7 +451,7 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\enemyKilled.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\enemyKilled.xnb</Output>
       <Time>2014-12-04T13:21:21-04:00</Time>
     </Item>
     <Item>
@@ -460,7 +460,7 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\playerExplosion.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\audio-fx\playerExplosion.xnb</Output>
       <Time>2014-12-08T16:03:54-04:00</Time>
     </Item>
     <Item>
@@ -469,7 +469,7 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\font.xnb</Output>
+      <Output>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\font.xnb</Output>
       <Time>2014-11-29T04:00:19-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
@@ -479,10 +479,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenuContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\obj\Windows Phone\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenuContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\obj\Windows Phone\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenu\bin\Windows Phone\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

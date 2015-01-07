@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 
-namespace newSpace3
+namespace newSpace3_2
 {
 
     /* To do and notes: 2/jan/2014
@@ -18,6 +18,8 @@ namespace newSpace3
      */
     public class Main : Microsoft.Xna.Framework.Game
     {
+        #region variables
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -59,6 +61,7 @@ namespace newSpace3
 
         #endregion
 
+        #endregion
 
         public Main()
         {
@@ -279,6 +282,8 @@ namespace newSpace3
 
                 men.backBtn();                
             }
+
+            //se.CheckPositionsAfterRand();
 
             base.Update(gameTime);
         }

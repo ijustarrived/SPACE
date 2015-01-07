@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 
-namespace newSpace3
+namespace newSpace3_2
 {
     /*Notes, ideas and problems: 23/nov/2014 
      * 

@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 using System.Windows;
 
-namespace newSpace3
+namespace newSpace3_2
 {
     /* Notes, ideas and problems: 2/dec/2014 
      * 
@@ -896,6 +896,8 @@ namespace newSpace3
                 menuNumber = hd.setMenuNum();
 
                 mp.displayInGameBg(sp);
+
+                se.CheckPositionsAfterRand();
 
                 se.displayImgs(sp, sf);
 

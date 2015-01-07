@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{4a2fc363-4e4e-442f-bf31-396414039fe0}" Title="newSpace 3" RuntimeType="XNA" Version="1.0.0.0" Genre="Apps.Normal" Author="" Description="" Publisher="">
+  <App xmlns="" ProductID="{4a2fc363-4e4e-442f-bf31-396414039fe0}" Title="newSpace 3.2" RuntimeType="XNA" Version="1.0.0.0" Genre="Apps.Normal" Author="" Description="" Publisher="">
     <IconPath IsRelative="true" IsResource="false">PhoneGameThumb.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />

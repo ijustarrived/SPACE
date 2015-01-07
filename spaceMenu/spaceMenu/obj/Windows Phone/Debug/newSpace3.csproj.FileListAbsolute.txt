@@ -64,3 +64,4 @@ C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\sp
 bin\Windows Phone\Debug\
 C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\bin\Windows Phone\Debug\spaceMenu.xap
 C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\obj\Windows Phone\Debug\XapCacheFile.xml
+C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenu\obj\Windows Phone\Debug\newSpace3.csprojResolveAssemblyReference.cache

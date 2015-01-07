@@ -12,14 +12,9 @@ using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Devices.Sensors;
 
-namespace newSpace3
+namespace newSpace3_2
 {
-    /*Notes, stuff to do and ideas 4/jan/2014
-     * 
-     * randomly aveces el hud desaparece, puede ser cuando 2 van a la vez. Verificar el warning section.
-     * 
-     * Verificar que si el fx del screen crack plays y matas un enemigo mientras ese sta playing, el fx del enemy deaths no suena.
-     * En otras ocaciones el screen crack fx plays y despues el enemy death fx plays sin haber matado uno
+    /*Notes, stuff to do and ideas 7/jan/2014
      * 
      */
 
@@ -126,8 +121,8 @@ namespace newSpace3
             }
         }
 
-        //play cualquier fx
-        public void PlaySound( SoundEffect fx)
+        // por si  tienes que play una vez
+        public void PlaySound(SoundEffect fx)
         {
             if (isSoundOn)
             {
