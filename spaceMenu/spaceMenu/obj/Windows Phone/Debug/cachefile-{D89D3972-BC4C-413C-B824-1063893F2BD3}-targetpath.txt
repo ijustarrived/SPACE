@@ -4,6 +4,8 @@ Content\audio-fx\spaceSurv.xnb
 Content\audio-fx\spaceSurv.wma
 Content\audio-fx\gameOver.xnb
 Content\audio-fx\gameOver.wma
+Content\audio-fx\spashScreenAudio.xnb
+Content\audio-fx\spashScreenAudio.wma
 Content\pictures\volClosed.xnb
 Content\pictures\volOpen.xnb
 Content\pictures\menuBtn.xnb
@@ -47,6 +49,8 @@ Content\HUDpics\OFF.xnb
 Content\HUDpics\ON.xnb
 Content\HUDpics\Retry.xnb
 Content\EnemyPics\greymanSmall.xnb
+Content\pictures\rRLogo.xnb
+Content\HUDpics\howToPlay.xnb
 Content\audio-fx\btnSound.xnb
 Content\audio-fx\Shoot3.xnb
 Content\audio-fx\screenHit.xnb

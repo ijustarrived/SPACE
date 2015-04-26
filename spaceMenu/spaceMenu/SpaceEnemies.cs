@@ -11,14 +11,17 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 
-namespace newSpace3_2
+namespace newSpace3_4
 {
-    /* Notes, ideas and problems: 7/jan/2014
+    /* Notes, ideas and problems: 8/mar/2015
      * 
+     * When gameover, rarely, pasa que lo enemies siguen moviendo, no se supone que pase(BUG)
      * 
      */
 
-    //se manipulan las imagenes de los enemigos y se le agrega un chispo de animacion al destruirse
+    /// <summary>
+    /// Se manipulan las imagenes de los enemigos y se le agrega un chispo de animacion al destruirse
+    /// </summary>
     class SpaceEnemies
     {
         #region variables
@@ -109,25 +112,28 @@ namespace newSpace3_2
 
         #endregion
 
-        // pasa el objeto de HUD 
+        /// <summary>
+        /// Pasa el objeto de HUD 
+        /// </summary>
+        /// <param name="h"></param>
         public void SetHd(HUD h)
         {
             hd = h;
         }
 
-        // asigna el valor del fx
+        /// <summary>
+        /// Asigna el valor del fx
+        /// </summary>
+        /// <param name="fx"></param>
         public void SetFx(SoundEffect fx)
         {
             enemyExplodeSound = fx;
         }
 
-        // regresa cantida de enemigos killed, para saber si mueve el bg
-        public int GetEnemyCounter()
-        {
-            return enemyKilledCounter;
-        }
-
-        // se usa para calcular el total final en el main
+        /// <summary>
+        /// Se usa para calcular el total final en el main
+        /// </summary>
+        /// <returns>Pts acomulados</returns>
         public int GetPts()
         {
             return pts;
@@ -138,13 +144,19 @@ namespace newSpace3_2
             pts = points;
         }
 
-        // se usa para calcular el total final en el main
+        /// <summary>
+        ///  Se usa para calcular el total final en el main
+        /// </summary>
+        /// <returns>Missed shots</returns>
         public int GetMiss()
         {
             return misShots;
         }
 
-        //pone todas las imagenes en enemyImgs para que se usen en la clase
+        /// <summary>
+        /// Pone todas las imagenes en enemyImgs para que se usen en la clase
+        /// </summary>
+        /// <param name="imgList">EnemyImg array</param>
         public void SetImgs(Texture2D[] imgList)
         {
             for (int i = 0; imgList.Length > i; i++)
@@ -153,53 +165,81 @@ namespace newSpace3_2
             }
         }
 
-        //Para recoger el valor de HUD
+        /// <summary>
+        /// Para recoger el valor de HUD
+        /// </summary>
+        /// <param name="value"></param>
         public void SetScrnValue(float value)
         {
             screenVal = value;
         }
 
-        //asigna el flag si el player esta hit
+        /// <summary>
+        /// Asigna el flag si el player esta hit
+        /// </summary>
+        /// <param name="hit">Player hit boolean</param>
         public void SetPlayerHit(bool hit)
         {
             playerHit = hit;
         }
 
-        //regresa los rectangulos de cada enemigo par aque se puedan usar en la validacion de distancia. checkDistanceFromScreen
-        public Rectangle[] getEnemyImgRects()
+        /// <summary>
+        /// Para que se puedan usar en la validacion de distancia. checkDistanceFromScreen
+        /// </summary>
+        /// <returns>Los rectangulos de cada enemigo</returns>
+        public Rectangle[] GetEnemyImgRects()
         {
             return imgsRec;
         }
 
-        // para enviar el valor a HUD
+        /// <summary>
+        ///  Para enviar el valor a HUD
+        /// </summary>
+        /// <returns>Value para multiplicar con color</returns>
         public float GetScreenVal()
         {
             return screenVal;
         }
 
-        //para enviar el valor a HUD
+        /// <summary>
+        /// Para enviar el valor a HUD
+        /// </summary>
+        /// <returns>Boolean que te deja saber si murio</returns>
         public bool GetBigEnemyKilled()
         {
             return isBigKilled;
         }
 
+        /// <summary>
+        /// Para enviar el valor a HUD
+        /// </summary>
+        /// <returns>Boolean que te deja saber si murio</returns>
         public bool GetSmallEnemyKilled()
         {
             return isSmallKilled;
         }
 
+        /// <summary>
+        /// Para enviar el valor a HUD
+        /// </summary>
+        /// <returns>Boolean que te deja saber si murio</returns>
         public bool GetSmallGrayKilled()
         {
             return isGreySmallKilled;
         }
 
-        // asigna el flag para poder saber si le dieron al player para play el screencrack animation
+        /// <summary>
+        ///Para poder saber si le dieron al player para play el screencrack animation
+        /// </summary>
+        /// <returns>Player hit boolean</returns>
         public bool GetPlayerHit()
         {
             return playerHit;
         }
 
-        //reset la posision, el valor de trasparencia y el size
+        /// <summary>
+        /// Reset la posicion, el valor de trasparencia y el size
+        /// </summary>
         public void resetBigGuy()
         {
             imgsRec[0].Width = 0;
@@ -220,6 +260,9 @@ namespace newSpace3_2
             //bigGuyColor.B = 255;
         }
 
+        /// <summary>
+        /// Reset la posicion, el valor de trasparencia y el size
+        /// </summary>
         public void resetSmallGuy()
         {
             imgsRec[1].Width = 0;
@@ -240,7 +283,9 @@ namespace newSpace3_2
 
             //smallguyColor.B = 255;
         }
-
+        /// <summary>
+        /// Reset la posicion, el valor de trasparencia y el size
+        /// </summary>
         public void ResetSmallGray()
         {
             imgsRec[2].Width = 0;
@@ -256,12 +301,10 @@ namespace newSpace3_2
             isSmallGrayFxPlaying = false;
         }
 
-        /* Method documentation
-         * 
-         * se llama al comenzar el juego para evitar que cuando se regrese al menu y le de play otravez las variables 
-        de distancia se queden con el mismo valor
-         * 
-         */
+        /// <summary>
+        /// Se llama al comenzar el juego para evitar que cuando se regrese al menu y le de play, otravez, las variables
+        /// de distancia se queden con el mismo valor.
+        /// </summary>
         public void fullReset()
         {
             resetBigGuy();
@@ -287,13 +330,19 @@ namespace newSpace3_2
             smallEnemyHp = 1;
         }
 
-        //regresa el array de rect para verificar si algun enemifo esta serca del screen
+        /// <summary>
+        /// Para verificar si algun enemigo esta serca del screen
+        /// </summary>
+        /// <returns>Regresa el array de rect de enemigo</returns>
         public Rectangle[] GetEnemyRecs()
         {
             return imgsRec;
         }
 
-        // sale la imagen del dust y fades slowly
+        /// <summary>
+        /// Sale la imagen del dust y fades slowly
+        /// </summary>
+        /// <param name="sp">Objeto</param>
         public void playEnemyDeathAnimation(SpriteBatch sp)
         {
             #region big guy
@@ -361,12 +410,12 @@ namespace newSpace3_2
 
             if (isGreySmallKilled)
             {
-                if ((!playerHit) && (!isSmallGrayFxPlaying))
-                {
-                    isSmallGrayFxPlaying = true;
+                //if ((!playerHit) && (!isSmallGrayFxPlaying))
+                //{
+                //    isSmallGrayFxPlaying = true;
 
-                    hd.PlaySound(ref isSmallGrayEnemyExplodePlaying, enemyExplodeSound);
-                }
+                //    hd.PlaySound(ref isSmallGrayEnemyExplodePlaying, enemyExplodeSound);
+                //}
 
                 if (isGraySmallAniRunning)
                 {
@@ -471,7 +520,9 @@ namespace newSpace3_2
             #endregion
         }
 
-        //inicializa los rectangulos con las coordenadas de las imagenes
+        /// <summary>
+        /// Inicializa los rectangulos con las coordenadas de las imagenes
+        /// </summary>
         public void initRectangles()
         {
             //use el length de enemyCoor por que la cantidad de coordenadas es la cantidad de enemigos.
@@ -481,7 +532,9 @@ namespace newSpace3_2
             }
         }
 
-        //randomiza las coordenadas de los enemigos y las pone en enemyCoor
+        /// <summary>
+        /// Randomiza las coordenadas de los enemigos y las pone en enemyCoor
+        /// </summary>
         public void randomizeCoor()
         {
             Random rand = new Random(),
@@ -506,121 +559,16 @@ namespace newSpace3_2
                 }
             }
         }
-
-        // verifica que ninguno enemy spawn in collition range de cada uno. If so run randomizer again
-        public void CheckPositionsAfterRand()
-        {
-            #region big guy and small guy
-
-            if (imgsRec[0].Intersects(imgsRec[1]))
-            {
-                if (imgsRec[0].Width < imgsRec[1].Width)
-                {
-                    randomizeCoor();
-
-                    imgsRec[0].X = (int)enemyCoor[0].X;
-
-                    imgsRec[0].Y = (int)enemyCoor[0].Y;
-                }
-                else
-                {
-                    randomizeCoor();
-
-                    imgsRec[1].X = (int)enemyCoor[1].X;
-
-                    imgsRec[1].Y = (int)enemyCoor[1].Y;
-                }
-            }
-
-            else if (imgsRec[0].Intersects(imgsRec[2]))
-            {
-                if (imgsRec[0].Width < imgsRec[2].Width)
-                {
-                    randomizeCoor();
-
-                    imgsRec[0].X = (int)enemyCoor[0].X;
-
-                    imgsRec[0].Y = (int)enemyCoor[0].Y;
-                }
-                else
-                {
-                    randomizeCoor();
-
-                    imgsRec[2].X = (int)enemyCoor[2].X;
-
-                    imgsRec[2].Y = (int)enemyCoor[2].Y;
-                }
-            }
-
-            #endregion
-
-            //if (imgsRec[1].Intersects(imgsRec[0]))
-            //{
-            //    if (imgsRec[0].Width < imgsRec[1].Width)
-            //    randomizeCoor();
-
-            //    imgsRec[1].X = (int)enemyCoor[1].X;
-
-            //    imgsRec[1].Y = (int)enemyCoor[1].Y;
-            //}
-
-            #region small guy and small gray guy
-
-            if (imgsRec[1].Intersects(imgsRec[2]))
-            {
-                if (imgsRec[1].Width < imgsRec[2].Width)
-                {
-                    randomizeCoor();
-
-                    imgsRec[1].X = (int)enemyCoor[1].X;
-
-                    imgsRec[1].Y = (int)enemyCoor[1].Y;
-                }
-
-                else
-                {
-                    randomizeCoor();
-
-                    imgsRec[2].X = (int)enemyCoor[2].X;
-
-                    imgsRec[2].Y = (int)enemyCoor[2].Y;
-                }
-            }
-
-            #endregion
-
-            #region small gray and big guy
-
-            if (imgsRec[2].Intersects(imgsRec[0]))
-            {
-                if (imgsRec[2].Width < imgsRec[0].Width)
-                {
-                    randomizeCoor();
-
-                    imgsRec[2].X = (int)enemyCoor[2].X;
-
-                    imgsRec[2].Y = (int)enemyCoor[2].Y;
-                }
-
-                else
-                {
-                    randomizeCoor();
-
-                    imgsRec[0].X = (int)enemyCoor[0].X;
-
-                    imgsRec[0].Y = (int)enemyCoor[0].Y;
-                }
-            }
-
-            #endregion
-        }
-
-        //le suma uno al ancho y el largo para dar la impresion que se estan acercando, si le dan a player, brende el flag de hit
-        /*
-         * Si que valla mas rapido debo jugar con bajando y subiendo el valor de max speed o de addtowidth
+        
+        /* Explicacion de movimiento de enemigos
+         * Le suma uno al ancho y el largo para dar la impresion que se estan acercando, si le dan a player, brende el flag de hit.
+         *
+         * Si quiero que valla mas rapido debo bajar y subir el valor de max speed o de addtowidth
          */
 
-        //agrega el mas al size y le resta a cuan rapido se le agrega al size para qu sea mas rapido 
+        /// <summary>
+        /// Agrega mas al size y le resta a cuan rapido se le agrega al size para que sea mas rapido 
+        /// </summary>
         public void BigGuyMovesFaster()
         {
             if (bigAddToSize < 8)
@@ -645,6 +593,9 @@ namespace newSpace3_2
             }
         }
 
+        /// <summary>
+        /// Agrega mas al size y le resta a cuan rapido se le agrega al size para que sea mas rapido 
+        /// </summary>
         public void SmallGuyMovesFaster()
         {
             if (smallAddToSize < 8)
@@ -668,6 +619,9 @@ namespace newSpace3_2
             }   
         }
 
+        /// <summary>
+        /// Agrega mas al size y le resta a cuan rapido se le agrega al size para que sea mas rapido 
+        /// </summary>
         public void GreySmallGuyMovesFaster()
         {
             if (greySmallAddToSize < 8)
@@ -691,10 +645,12 @@ namespace newSpace3_2
             }
         }
 
-        /*
-         * regula cuan rapido crece cada imagen menor el # de increaseEnemy mas rapido crece, pero a mayor el width y el
-         * height, tambien mas rapido crece.
-         */
+        /// <summary>
+        /// Regula cuan rapido crece cada imagen. Al ser menor el # de increaseEnemy mas rapido crece, pero a mayor el width y el
+        /// height, tambien mas rapido crece.
+        /// </summary>
+        /// <param name="sp">Objeto</param>
+        /// <param name="hd">Objeto</param>
         public void enemiesGetCloser( SpriteBatch sp, HUD hd)
         {
             #region big guy
@@ -901,43 +857,63 @@ namespace newSpace3_2
             #endregion
         }
 
-        //asigna el valor del metodo CalcMultTimer
+        /// <summary>
+        /// Asigna el valor del activacion de multiplicador del metodo CalcMultTimer
+        /// </summary>
+        /// <param name="isActive">Boolean de multiplier activo</param>
         public void SetIsMultActive(bool isActive)
         {
             isMultActive = isActive;
         }
 
-        //asigna el valor del metodo CalcMultTimer
+        /// <summary>
+        /// Asigna el valor del metodo CalcMultTimer
+        /// </summary>
+        /// <param name="timer">Valor de timer</param>
         public void SetMultTimer(int timer)
         {
             multTimer = timer;
         }
 
-        //asigna el valor del metodo CalcMultTimer
+        /// <summary>
+        /// Asigna el valor del multiplo para el metodo CalcMultTimer
+        /// </summary>
+        /// <param name="multiplo">Valor numerico</param>
         public void SetMultMultiplo(int multiplo)
         {
             ptsMult = multiplo;
         }
 
-        //para usar el valor en CalcMultMultiplo y CalcMultTimer
+        /// <summary>
+        /// Para usar el valor en CalcMultMultiplo y CalcMultTimer
+        /// </summary>
+        /// <returns>Boolean para activacion de multiplo</returns>
         public bool GetIsMultActive()
         {
             return isMultActive;
         }
 
-        //para usar el valor en CalcMultMultiplo y CalcMultTimer
+        /// <summary>
+        /// Para usar el valor en CalcMultMultiplo y CalcMultTimer
+        /// </summary>
+        /// <returns>Valor numerico del timer</returns>
         public int GetMultTimer()
         {
             return multTimer;
         }
 
-        // para que se use en el hud cuando el hud is displayed
+        /// <summary>
+        /// Para que se use en el hud cuando se necesite desplegar
+        /// </summary>
+        /// <returns>Valor numerico del multiplo</returns>
         public int GetMultMultiplo()
         {
             return ptsMult;
         }
 
-        // asigna default values
+        /// <summary>
+        /// Asigna default values
+        /// </summary>
         public void ResetMult()
         {
             isMultActive = false;
@@ -947,7 +923,9 @@ namespace newSpace3_2
             ptsMult = 0;
         }
 
-        // calcula el multiplo de multiplier
+        /// <summary>
+        /// Calcula el multiplo de multiplier
+        /// </summary>
         public void CalcMultMultiplo()
         {
             if (isMultActive)
@@ -970,7 +948,11 @@ namespace newSpace3_2
             }
         }
 
-        //caulcula el timer del multiplier
+        /// <summary>
+        /// Calcula el timer del multiplier
+        /// </summary>
+        /// <param name="timer">Valor numerico del timer</param>
+        /// <param name="isActive">Booleano de activacion de multiplo</param>
         public void CalcMultTimer(int timer, bool isActive)
         {
             if (isActive)
@@ -997,7 +979,10 @@ namespace newSpace3_2
             }
         }
 
-        // called everytime you miss
+        /// <summary>
+        /// Adds to missedShots y resets el multiplier.
+        /// Called everytime you miss
+        /// </summary>
         public void MissedAShot()
         {
             misShots++;
@@ -1005,7 +990,15 @@ namespace newSpace3_2
             ResetMult();
         }
 
-        // verifica colision de meteoro grande
+        /// <summary>
+        /// Verifica colision del grande
+        /// </summary>
+        /// <param name="bigEnemyRec">Rectangulo del grande</param>
+        /// <param name="grayEnemyRect">Rectangulo del griz</param>
+        /// <param name="smallEnemyRect">Rectangulo del small</param>
+        /// <param name="crosshairRect">Rectangulo del crosshair</param>
+        /// <param name="pauseImgRect">Rectangulo del imagen de pausa</param>
+        /// <param name="mouseRect"></param>
         public void BigCollision(Rectangle bigEnemyRec, Rectangle grayEnemyRect, Rectangle smallEnemyRect, Rectangle crosshairRect, Rectangle pauseImgRect,
                                  Rectangle mouseRect)
         {
@@ -1047,7 +1040,7 @@ namespace newSpace3_2
 
             else
             {
-                // por alguna rason dice que si colisiona con el pequeño con todo y eso que no se esta dibujando.
+                // por alguna rason, si colisiona con el pequeño, con todo y eso que no se esta dibujando.
                 //Para eso esta este si no esta muerto, verifica eso, si esta muerto, vete directo al else.
                
                     //si dispara no choca con el grande y tampoco con el small one
@@ -1063,7 +1056,15 @@ namespace newSpace3_2
             }
         }
 
-        //verifica colision de enemigo pequeño
+        /// <summary>
+        /// Verifica colision de enemigo pequeño
+        /// </summary>
+        /// <param name="smallEnemyRec"></param>
+        /// <param name="grayEnemyRect"></param>
+        /// <param name="bigEnemyRect"></param>
+        /// <param name="crosshairRect"></param>
+        /// <param name="pauseImgRect"></param>
+        /// <param name="mouseRect"></param>
         public void SmallCollision(Rectangle smallEnemyRec, Rectangle grayEnemyRect, Rectangle bigEnemyRect, Rectangle crosshairRect, Rectangle pauseImgRect, 
                                    Rectangle mouseRect)
         {
@@ -1116,8 +1117,16 @@ namespace newSpace3_2
             }
         }
 
-        //verifica colision de enemigo pequeño griz
-        public void SmallGrayColli(Rectangle grayEnemyRect, Rectangle smallEnemyRec, Rectangle bigEnemyRect, Rectangle crossRect, Rectangle pauseImgRect, 
+        /// <summary>
+        /// Verifica colision de enemigo griz
+        /// </summary>
+        /// <param name="grayEnemyRect"></param>
+        /// <param name="smallEnemyRec"></param>
+        /// <param name="bigEnemyRect"></param>
+        /// <param name="crossRect"></param>
+        /// <param name="pauseImgRect"></param>
+        /// <param name="mouseRect"></param>
+        public void GrayCollision(Rectangle grayEnemyRect, Rectangle smallEnemyRec, Rectangle bigEnemyRect, Rectangle crossRect, Rectangle pauseImgRect, 
                                    Rectangle mouseRect)
         {
             if (crossRect.Intersects(grayEnemyRect))
@@ -1159,7 +1168,13 @@ namespace newSpace3_2
             }
         }
 
-        //verifica si hay colision con algun enemigo 
+        /// <summary>
+        /// Verifica si hay colision con algun enemigo 
+        /// </summary>
+        /// <param name="enemyRect">Array de rectangulos de enemigos</param>
+        /// <param name="crosshiarRect"></param>
+        /// <param name="pauseImgRect"></param>
+        /// <param name="mouseRect"></param>
         public void CheckForEnemyCollision( Rectangle[] enemyRect, Rectangle crosshiarRect, Rectangle pauseImgRect, Rectangle mouseRect)
         {
             if (!isSmallKilled)
@@ -1174,11 +1189,15 @@ namespace newSpace3_2
 
             if (!isGreySmallKilled)
             {
-                SmallGrayColli(enemyRect[2], enemyRect[1], enemyRect[0], crosshiarRect, pauseImgRect, mouseRect);
+                GrayCollision(enemyRect[2], enemyRect[1], enemyRect[0], crosshiarRect, pauseImgRect, mouseRect);
             }
         }
 
-        //desplega las imagenes de los enemigos y death animation
+        /// <summary>
+        /// Desplega las imagenes de los enemigos y death animation
+        /// </summary>
+        /// <param name="sp">Objeto</param>
+        /// <param name="sf">Objeto</param>
         public void displayImgs(SpriteBatch sp, SpriteFont sf)
         {
             //sp.DrawString(sf, "smallGrayAniPhase: " + isGreySmallKilled.ToString(), new Vector2(100, 100), Color.Yellow);

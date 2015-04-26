@@ -1,0 +1,546 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>audio-fx\backToSpace.mp3</Source>
+      <Name>audio-fx\backToSpace</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\audio-fx\backToSpace.xnb</Output>
+      <Extra>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\audio-fx\backToSpace.wma</Extra>
+      <Time>2014-11-09T22:46:36-04:00</Time>
+    </Item>
+    <Item>
+      <Source>audio-fx\spaceSurv.mp3</Source>
+      <Name>audio-fx\spaceSurv</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\audio-fx\spaceSurv.xnb</Output>
+      <Extra>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\audio-fx\spaceSurv.wma</Extra>
+      <Time>2014-11-18T16:24:26-04:00</Time>
+    </Item>
+    <Item>
+      <Source>audio-fx\gameOver.mp3</Source>
+      <Name>audio-fx\gameOver</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\audio-fx\gameOver.xnb</Output>
+      <Extra>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\audio-fx\gameOver.wma</Extra>
+      <Time>2014-12-08T17:18:32-04:00</Time>
+    </Item>
+    <Item>
+      <Source>audio-fx\spashScreenAudio.mp3</Source>
+      <Name>audio-fx\spashScreenAudio</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\audio-fx\spashScreenAudio.xnb</Output>
+      <Extra>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\audio-fx\spashScreenAudio.wma</Extra>
+      <Time>2015-03-07T23:14:14-04:00</Time>
+    </Item>
+    <Item>
+      <Source>pictures\Fin_Mtit_volume.png</Source>
+      <Name>pictures\volClosed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\pictures\volClosed.xnb</Output>
+      <Time>2014-11-09T22:48:06-04:00</Time>
+    </Item>
+    <Item>
+      <Source>pictures\Fin_Mtit_volume2.png</Source>
+      <Name>pictures\volOpen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\pictures\volOpen.xnb</Output>
+      <Time>2014-11-09T22:48:04-04:00</Time>
+    </Item>
+    <Item>
+      <Source>pictures\Fin_tit_menu.png</Source>
+      <Name>pictures\menuBtn</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\pictures\menuBtn.xnb</Output>
+      <Time>2014-11-09T22:47:46-04:00</Time>
+    </Item>
+    <Item>
+      <Source>pictures\Fin_tit_missionselect.png</Source>
+      <Name>pictures\missionSel</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\pictures\missionSel.xnb</Output>
+      <Time>2014-11-09T22:47:40-04:00</Time>
+    </Item>
+    <Item>
+      <Source>pictures\Fin_tit_options.png</Source>
+      <Name>pictures\optionBtn</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\pictures\optionBtn.xnb</Output>
+      <Time>2014-11-09T22:47:36-04:00</Time>
+    </Item>
+    <Item>
+      <Source>pictures\Arcade_mode.png</Source>
+      <Name>pictures\arcadeBtn</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\pictures\arcadeBtn.xnb</Output>
+      <Time>2014-11-09T22:48:24-04:00</Time>
+    </Item>
+    <Item>
+      <Source>pictures\Campaign.png</Source>
+      <Name>pictures\campBtn</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\pictures\campBtn.xnb</Output>
+      <Time>2014-11-09T22:48:20-04:00</Time>
+    </Item>
+    <Item>
+      <Source>pictures\Fin_Titlescreen_Grey2.png</Source>
+      <Name>pictures\optBG</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\pictures\optBG.xnb</Output>
+      <Time>2014-11-09T22:47:56-04:00</Time>
+    </Item>
+    <Item>
+      <Source>pictures\Cracked_glass.png</Source>
+      <Name>pictures\Cracked_glass</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\pictures\Cracked_glass.xnb</Output>
+      <Time>2014-11-09T22:48:18-04:00</Time>
+    </Item>
+    <Item>
+      <Source>pictures\vOFF.png</Source>
+      <Name>pictures\off</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\pictures\off.xnb</Output>
+      <Time>2014-11-09T22:47:32-04:00</Time>
+    </Item>
+    <Item>
+      <Source>pictures\vON.png</Source>
+      <Name>pictures\on</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\pictures\on.xnb</Output>
+      <Time>2014-11-09T22:47:30-04:00</Time>
+    </Item>
+    <Item>
+      <Source>EnemyPics\Explosion.png</Source>
+      <Name>EnemyPics\Explosion</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\EnemyPics\Explosion.xnb</Output>
+      <Time>2014-11-09T22:46:48-04:00</Time>
+    </Item>
+    <Item>
+      <Source>EnemyPics\Fin_Asteroid.png</Source>
+      <Name>EnemyPics\meteor2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\EnemyPics\meteor2.xnb</Output>
+      <Time>2014-11-09T22:46:44-04:00</Time>
+    </Item>
+    <Item>
+      <Source>EnemyPics\Fin_meteor.png</Source>
+      <Name>EnemyPics\meteor</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\EnemyPics\meteor.xnb</Output>
+      <Time>2014-11-09T22:46:40-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\Cracked_glass.png</Source>
+      <Name>HUDpics\cracked</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\cracked.xnb</Output>
+      <Time>2014-11-09T22:47:10-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\Health_bottom.png</Source>
+      <Name>HUDpics\hpBotLayer</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\hpBotLayer.xnb</Output>
+      <Time>2014-11-09T22:47:06-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\Health_top.png</Source>
+      <Name>HUDpics\hpTopLayer</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\hpTopLayer.xnb</Output>
+      <Time>2014-11-09T22:47:02-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\Pause.png</Source>
+      <Name>HUDpics\Pause</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\Pause.xnb</Output>
+      <Time>2014-11-09T22:46:54-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\topEnemy_stat.png</Source>
+      <Name>HUDpics\enemyBar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\enemyBar.xnb</Output>
+      <Time>2014-11-09T22:46:52-04:00</Time>
+    </Item>
+    <Item>
+      <Source>MapImgs\Fin_pause_screen.png</Source>
+      <Name>MapImgs\Fin_pause_screen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\MapImgs\Fin_pause_screen.xnb</Output>
+      <Time>2014-11-09T22:47:26-04:00</Time>
+    </Item>
+    <Item>
+      <Source>MapImgs\NebulaSample.png</Source>
+      <Name>MapImgs\bigNeb</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\MapImgs\bigNeb.xnb</Output>
+      <Time>2014-11-09T23:12:52-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\Fin_crosshair2.png</Source>
+      <Name>HUDpics\Crosshair</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\Crosshair.xnb</Output>
+      <Time>2014-11-15T16:09:20-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\NewShot.png</Source>
+      <Name>HUDpics\shotImg</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\shotImg.xnb</Output>
+      <Time>2014-11-15T21:08:58-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\X2.png</Source>
+      <Name>HUDpics\X2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\X2.xnb</Output>
+      <Time>2014-12-30T16:59:26-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\X4.png</Source>
+      <Name>HUDpics\X4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\X4.xnb</Output>
+      <Time>2014-12-30T16:59:26-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\X6.png</Source>
+      <Name>HUDpics\X6</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\X6.xnb</Output>
+      <Time>2014-12-30T16:59:26-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\X8.png</Source>
+      <Name>HUDpics\X8</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\X8.xnb</Output>
+      <Time>2014-12-30T16:59:26-04:00</Time>
+    </Item>
+    <Item>
+      <Source>pictures\space_titlescreen_purp.png</Source>
+      <Name>pictures\menuBG</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\pictures\menuBG.xnb</Output>
+      <Time>2014-12-30T17:29:38-04:00</Time>
+    </Item>
+    <Item>
+      <Source>EnemyPics\Explo1.png</Source>
+      <Name>EnemyPics\greyMan3Explo1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\EnemyPics\greyMan3Explo1.xnb</Output>
+      <Time>2014-12-30T18:16:54-04:00</Time>
+    </Item>
+    <Item>
+      <Source>EnemyPics\Explos2.png</Source>
+      <Name>EnemyPics\greyMan3Explo2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\EnemyPics\greyMan3Explo2.xnb</Output>
+      <Time>2014-12-30T18:16:54-04:00</Time>
+    </Item>
+    <Item>
+      <Source>EnemyPics\Explos3.png</Source>
+      <Name>EnemyPics\greyman3Explo3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\EnemyPics\greyman3Explo3.xnb</Output>
+      <Time>2014-12-30T18:16:54-04:00</Time>
+    </Item>
+    <Item>
+      <Source>pictures\GameOver.png</Source>
+      <Name>pictures\GameOver</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\pictures\GameOver.xnb</Output>
+      <Time>2014-12-30T19:10:28-04:00</Time>
+    </Item>
+    <Item>
+      <Source>pictures\GameOver_MainMenu.png</Source>
+      <Name>pictures\mainMenuBtn</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\pictures\mainMenuBtn.xnb</Output>
+      <Time>2014-12-30T21:04:50-04:00</Time>
+    </Item>
+    <Item>
+      <Source>pictures\GameOver_Retry.png</Source>
+      <Name>pictures\retryBtn</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\pictures\retryBtn.xnb</Output>
+      <Time>2014-12-30T21:04:50-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\GamePaused.png</Source>
+      <Name>HUDpics\GamePaused</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\GamePaused.xnb</Output>
+      <Time>2014-12-30T22:45:24-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\HUD_outline.png</Source>
+      <Name>HUDpics\frame</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\frame.xnb</Output>
+      <Time>2014-12-30T22:46:06-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\GamePaused_MainMenu.png</Source>
+      <Name>HUDpics\return</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\return.xnb</Output>
+      <Time>2015-01-03T00:00:28-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\GamePaused_Resume.png</Source>
+      <Name>HUDpics\Resume</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\Resume.xnb</Output>
+      <Time>2014-12-31T00:16:12-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\GamePaused_Volume.png</Source>
+      <Name>HUDpics\vOpen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\vOpen.xnb</Output>
+      <Time>2015-01-03T00:05:40-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\Volume_OFF.png</Source>
+      <Name>HUDpics\OFF</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\OFF.xnb</Output>
+      <Time>2014-12-31T01:06:40-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\Volume_ON.png</Source>
+      <Name>HUDpics\ON</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\ON.xnb</Output>
+      <Time>2014-12-31T01:06:54-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\GamePaused_Retry.png</Source>
+      <Name>HUDpics\Retry</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\Retry.xnb</Output>
+      <Time>2014-12-31T02:21:18-04:00</Time>
+    </Item>
+    <Item>
+      <Source>EnemyPics\Asteroid3.png</Source>
+      <Name>EnemyPics\greymanSmall</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\EnemyPics\greymanSmall.xnb</Output>
+      <Time>2015-01-03T00:25:10-04:00</Time>
+    </Item>
+    <Item>
+      <Source>pictures\retroroots_logo.png</Source>
+      <Name>pictures\rRLogo</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\pictures\rRLogo.xnb</Output>
+      <Time>2015-03-07T23:24:04-04:00</Time>
+    </Item>
+    <Item>
+      <Source>HUDpics\tutorial.png</Source>
+      <Name>HUDpics\howToPlay</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\HUDpics\howToPlay.xnb</Output>
+      <Time>2015-03-15T17:12:24-04:00</Time>
+    </Item>
+    <Item>
+      <Source>audio-fx\btnSound.wav</Source>
+      <Name>audio-fx\btnSound</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\audio-fx\btnSound.xnb</Output>
+      <Time>2014-11-09T22:45:48-04:00</Time>
+    </Item>
+    <Item>
+      <Source>audio-fx\Shoot3.wav</Source>
+      <Name>audio-fx\Shoot3</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\audio-fx\Shoot3.xnb</Output>
+      <Time>2014-11-18T16:25:48-04:00</Time>
+    </Item>
+    <Item>
+      <Source>audio-fx\screenHit.wav</Source>
+      <Name>audio-fx\screenHit</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\audio-fx\screenHit.xnb</Output>
+      <Time>2014-11-18T16:27:00-04:00</Time>
+    </Item>
+    <Item>
+      <Source>audio-fx\enemyDestroyedEdited.wav</Source>
+      <Name>audio-fx\enemyKilled</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\audio-fx\enemyKilled.xnb</Output>
+      <Time>2014-12-04T16:21:22-04:00</Time>
+    </Item>
+    <Item>
+      <Source>audio-fx\playerDeadExpl.wav</Source>
+      <Name>audio-fx\playerExplosion</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\audio-fx\playerExplosion.xnb</Output>
+      <Time>2014-12-08T19:03:54-04:00</Time>
+    </Item>
+    <Item>
+      <Source>font.spritefont</Source>
+      <Name>font</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\font.xnb</Output>
+      <Time>2014-11-29T07:00:20-04:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <ContentProjectGUID>{D89D3972-BC4C-413C-B824-1063893F2BD3}</ContentProjectGUID>
+      <TargetPlatform>WindowsPhone</TargetPlatform>
+      <TargetProfile>Reach</TargetProfile>
+      <BuildConfiguration>Release</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenuContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\obj\Windows Phone\Release\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\DevilDesk\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.3\spaceMenu\spaceMenu\bin\Windows Phone\Release\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2011-09-01T16:22:30-04:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2011-09-01T16:22:30-04:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2011-09-01T16:22:30-04:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2011-09-01T16:22:30-04:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2011-09-01T16:22:30-04:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2011-09-01T16:22:30-04:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2014-03-08T16:45:05.3409671-04:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>

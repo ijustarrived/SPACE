@@ -12,13 +12,17 @@ using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Devices.Sensors;
 
-namespace newSpace3_2
+namespace newSpace3_4
 {
-    /*Notes, stuff to do and ideas 7/jan/2014
+    /*Notes, stuff to do and ideas 8/mar/2015
+     * 
+     * Raras veces el hud se desaparece(bug)
      * 
      */
 
-    //brega todo lo que tiene que ver con el HUD
+    /// <summary>
+    /// Brega todo lo que tiene que ver con el HUD
+    /// </summary>
     class HUD
     {
         #region class variables
@@ -27,10 +31,12 @@ namespace newSpace3_2
 
         private SpaceEnemies sE;
 
+        private SpriteBatch sp;
+
         private SoundEffect screenCrackSound,
             playerExplosionSound;
 
-        private Texture2D[] hudImgs = new Texture2D[18], // todas las imagenes
+        private Texture2D[] hudImgs = new Texture2D[19], // todas las imagenes
             menuImgs = new Texture2D[3]; // tiene las imagenes del volumen
 
         private Rectangle[] imgRec = new Rectangle[12]; //rectangulos del top y bot layer del hp, enemy hp y laser shot
@@ -65,6 +71,7 @@ namespace newSpace3_2
         #region bools
 
         private bool red = false, // flag par que cambie a rojo todo
+            isNotFirstTimePlaying = false, // flag que te deja saber si deje subir el how to play 
             isSoundOn = true, // flag que te deja saber si el sounido esta prendido
             playCrackedScreenOnce = false, // flag que te deja saber que se de play una vez y no muchas veces   
             playPlayerExplosionOnce = false,
@@ -83,6 +90,7 @@ namespace newSpace3_2
         #region ints
 
         private int counter = 0, // por cuanto va a estar todo rojo o blanco
+            howToPlayTimer = 0, // controls when the howToPlay starts and when it ends
             hpBarLowLayerLength = 391, // valor que vas a estar cambiando con cada hit del player para asi hacer el hp que baje
             hpBarTopLayerLength = 360,
             points = 0,
@@ -92,36 +100,108 @@ namespace newSpace3_2
         #endregion
 
         private Color hdColor = Color.White, // se usa para quitarle valor en el gameOver animation. Para que todo valla de rojo a negro
-            ptsFontColor = Color.Navy; // tiene el color del font de los points        
+            ptsFontColor = Color.Navy; // tiene el color del font de los points     
+
+        private MouseState oldState;
 
         #endregion
 
-        //coje valores del main y los pasa a la clase
-        public void GetFxs(SoundEffect fx, SoundEffect fx2)
+        /// <summary>
+        /// coje valores del main y los pasa a la clase
+        /// </summary>
+        /// <param name="fx">screenCrack</param>
+        /// <param name="fx2"> player explosion</param>
+        public void SetFxs(SoundEffect fx, SoundEffect fx2)
         {
             screenCrackSound = fx;
 
             playerExplosionSound = fx2;
         }
 
-        //coje el valor de menu y lo pasa a la variable de hd
+        public void SetSpriteBatch(SpriteBatch sb)
+        {
+            sp = sb;
+        }
+
+        /// <summary>
+        /// Is not por que el save me regresa false por default
+        /// </summary>
+        /// <param name="isNot1stTimePlaying"></param>
+        public void SetIsNot1stTimePlaying(bool isNot1stTimePlaying)
+        {
+            isNotFirstTimePlaying = isNot1stTimePlaying;
+        }
+
+        public bool GetIsNot1stTimePlaying()
+        {
+            return isNotFirstTimePlaying;
+        }
+
+        /// <summary>
+        /// Plays how to play img
+        /// </summary>
+        /// <param name="howToPlayImg">how to play image</param>
+        public void PlayHowToPlay()
+        {
+            if (!isNotFirstTimePlaying)
+            {
+                Vector2 logoCentralizedOrigin = new Vector2((float)hudImgs[18].Height / 2, (float)hudImgs[18].Width / 2);
+
+                if (howToPlayTimer < 130)
+                {
+                    sp.Draw(hudImgs[18], new Rectangle(0, 0, hudImgs[18].Width + 103, hudImgs[18].Height + 2), Color.White);
+
+                    oldState = Mouse.GetState();
+
+                    //if not pressed keep running how to play img, else skip to main menu 
+                    if (oldState.LeftButton != ButtonState.Pressed)
+                        howToPlayTimer++;
+
+                    else
+                    {
+                        howToPlayTimer = 130;
+
+                        isNotFirstTimePlaying = true;
+                    }
+                }
+
+                else
+                    isNotFirstTimePlaying = true;
+            }
+        }
+
+        public int GetHowToPlayTimer()
+        {
+            return howToPlayTimer;
+        }
+
+        /// <summary>
+        /// coje el valor de menu y lo pasa a la variable de hd
+        /// </summary>
         public void GetIsSoundOn()
         {
             isSoundOn = men.SetIsSoundOn();
         }
 
-        //play cualquier fx que se necesite repetir
-        public void PlaySound(ref bool onceFlag, SoundEffect fx)
+        /// <summary>
+        /// play cualquier fx que se necesite repetir
+        /// </summary>
+        /// <param name="isPlaying">Bool que te deja saber si la musica esta corriendo</param>
+        /// <param name="fx"></param>
+        public void PlaySound(ref bool isPlaying, SoundEffect fx)
         {
-            if (isSoundOn && (!onceFlag))
+            if (isSoundOn && (!isPlaying))
             {
-                onceFlag = true;
+                isPlaying = true;
 
                 fx.Play();
             }
         }
 
-        // por si  tienes que play una vez
+        /// <summary>
+        /// por si  tienes que play una vez
+        /// </summary>
+        /// <param name="fx"></param>
         public void PlaySound(SoundEffect fx)
         {
             if (isSoundOn)
@@ -130,77 +210,105 @@ namespace newSpace3_2
             }
         }
 
-      public void getMenu(Menu m)
-      {
-          men = m;
-      }
 
-      public void GetSpaceEnemies(SpaceEnemies s)
-      {
-          sE = s;
-      }
+        public void SetMenu(Menu m)
+        {
+            men = m;
+        }
 
-        //para usar en map para poder dejarle saber que empieze a blacken el backgeound. Part of the gameOver animation
-        public Boolean setPlayerDied()
+        public void SetSpaceEnemies(SpaceEnemies s)
+        {
+            sE = s;
+        }
+
+        /// <summary>
+        /// para usar en map para poder dejarle saber que empieze a blacken el backgeound. Part of the gameOver animation
+        /// </summary>
+        /// <returns>Bool que te deja saber que el player murio</returns>
+        public Boolean GetPlayerDied()
         {
             return playerDied;
         }
 
-        // asigna el valor cuando halla hecho ResetInGame de menu
-        public void getPlayerDied(bool isDead)
+        /// <summary>
+        /// asigna el valor cuando halla hecho ResetInGame de menu
+        /// </summary>
+        /// <param name="isDead">Bool qu te deja saber si el player ded</param>
+        public void SetPlayerDied(bool isDead)
         {
             playerDied = isDead;
         }
 
-        //para que se usen en el scoreboard
-        public int setPoints()
+        /// <summary>
+        /// para que se usen en el scoreboard
+        /// </summary>
+        /// <returns></returns>
+        public int GetPoints()
         {
             return points;
         }
 
-        //para que se usen en el scoreboard
-        public int setMissedShots()
+        /// <summary>
+        /// para que se usen en el scoreboard
+        /// </summary>
+        /// <returns></returns>
+        public int GetMissedShots()
         {
             return missedShots;
         }
 
-        //pone todas las imagenes en hudImgs para que se usen en la clase
-        public void getHUDImg(Texture2D[] imgList, Texture2D[] menImgs)
+        /// <summary>
+        /// pone todas las imagenes en hudImgs para que se usen en la clase
+        /// </summary>
+        /// <param name="imgs">hud imgs array</param>
+        /// <param name="menImgs">menu imgs array</param>
+        public void SetHUDImg(Texture2D[] imgs, Texture2D[] menImgs)
         {
-            for (int i = 0; imgList.Length > i; i++)
+            for (int i = 0; imgs.Length > i; i++)
             {
-                hudImgs[i] = imgList[i];
+                hudImgs[i] = imgs[i];
             }
 
             // volumen open
             menuImgs[0] = menImgs[3];
 
-             // off
+            // off
             menuImgs[1] = menImgs[8];
 
-             // on
+            // on
             menuImgs[2] = menImgs[9];
         }
 
-        // regresa la imagen de laser para que se pueda dibujar en el menu
-        public Texture2D setLaserImg()
+        /// <summary>
+        /// regresa la imagen de laser para que se pueda dibujar en el menu
+        /// </summary>
+        /// <returns></returns>
+        public Texture2D GetLaserImg()
         {
             return hudImgs[6];
         }
 
-        //asigna el current section number
-        public void getMenuNum(float num)
+        /// <summary>
+        /// asigna el current section number
+        /// </summary>
+        /// <param name="num">Menu section number</param>
+        public void SetMenuNum(float num)
         {
             menuNum = num;
         }
 
-        //regresa cuando section cambia 4
-        public float setMenuNum()
+        /// <summary>
+        /// regresa cuando section cambia 4
+        /// </summary>
+        /// <returns></returns>
+        public float GetMenuNum()
         {
             return menuNum;
         }
 
-        // initializa el accelerometro
+        /// <summary>
+        ///  initializa el accelerometro
+        /// </summary>
         public void InitAccel()
         {
             acc = new Accelerometer();
@@ -208,7 +316,11 @@ namespace newSpace3_2
             acc.ReadingChanged += new EventHandler<AccelerometerReadingEventArgs>(AccelerometerReadingChanged);
         }
 
-        //lee la data del acelerometro
+        /// <summary>
+        /// lee la data del acelerometro
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void AccelerometerReadingChanged(object sender, AccelerometerReadingEventArgs e)
         {
             accelReadings.X = -(float)e.Y;
@@ -216,10 +328,12 @@ namespace newSpace3_2
             accelReadings.Z = -(float)e.Z;
         }
 
-        //le dice al acelerometro que empieze a leer. Al momento siempre esta leyendo
+        /// <summary>
+        /// le dice al accelerometro que empieze a leer.
+        /// </summary>
         public void AccelStart()
         {
-            if(!(accelActive))
+            if (!(accelActive))
             {
                 acc.Start();
 
@@ -227,7 +341,9 @@ namespace newSpace3_2
             }
         }
 
-        //le dice al acelerometro que pare de leer. Al momento siempre esta leyendo
+        /// <summary>
+        /// le dice al acelerometro que pare de leer
+        /// </summary>
         public void AccelStop()
         {
             if (accelActive)
@@ -238,7 +354,9 @@ namespace newSpace3_2
             }
         }
 
-        //le sube y baja las coordenadas del crosshair
+        /// <summary>
+        /// le sube y baja las coordenadas del crosshair
+        /// </summary>
         public void MoveCrosshair()
         {
             if (accelActive)
@@ -251,7 +369,7 @@ namespace newSpace3_2
                     {
                         crosshairPos.Y += Convert.ToInt32(accelReadings.Y * 40);
 
-                        imgRec[4].Y +=  Convert.ToInt32(accelReadings.Y * 40);
+                        imgRec[4].Y += Convert.ToInt32(accelReadings.Y * 40);
 
                         crossHColiBox.Y += Convert.ToInt32(accelReadings.Y * 40);
                     }
@@ -304,20 +422,29 @@ namespace newSpace3_2
             }
         }
 
-        // para enviar el valor a spaceenemy
-        public float setScreenValue()
+        /// <summary>
+        ///  para enviar el valor a spaceenemy
+        /// </summary>
+        /// <returns></returns>
+        public float GetScreenValue()
         {
             return screenValue;
         }
 
-        //set player hit
-        public bool setPHit()
+        /// <summary>
+        /// set player hit
+        /// </summary>
+        /// <returns></returns>
+        public bool GetPHit()
         {
             return pHit;
         }
 
-        // para recoger el valor de spaceenemy
-        public void getScreenValue(float value)
+        /// <summary>
+        /// para recoger el valor de spaceenemy
+        /// </summary>
+        /// <param name="value"></param>
+        public void SetScreenValue(float value)
         {
             screenValue = value;
         }
@@ -329,10 +456,10 @@ namespace newSpace3_2
             imgRec[0] = new Rectangle(400, 50, hpBarTopLayerLength, 15);
 
             //hp bar
-            imgRec[1] = new Rectangle(400, 50, hpBarLowLayerLength, 20);      
+            imgRec[1] = new Rectangle(400, 50, hpBarLowLayerLength, 20);
 
             //laser left
-            imgRec[2] = new Rectangle(Convert.ToInt32(initialLaserPosition.X), Convert.ToInt32(initialLaserPosition.Y), 
+            imgRec[2] = new Rectangle(Convert.ToInt32(initialLaserPosition.X), Convert.ToInt32(initialLaserPosition.Y),
                 hudImgs[6].Width - 250, hudImgs[6].Height - 250);
 
             //pause button
@@ -343,7 +470,7 @@ namespace newSpace3_2
 
             // laser right
             imgRec[5] = new Rectangle(Convert.ToInt32(initialLaserPosition.X), Convert.ToInt32(initialLaserPosition.Y),
-                                        hudImgs[6].Width - 250, hudImgs[6].Height - 250);            
+                                        hudImgs[6].Width - 250, hudImgs[6].Height - 250);
 
             /* crosshair small box. How this works es que hay un small rect en el medio del crosshair, pero doesn't bound el crosshair y eso es lo que verifica si
              colisiona con los meteoros */
@@ -491,7 +618,7 @@ namespace newSpace3_2
         {
             if (mouseRect.Intersects(imgRec[7]))
             {
-                men.ResetInGame();
+                men.BackToMainMenu();
             }
         }
 
@@ -513,7 +640,9 @@ namespace newSpace3_2
 
                 else if (previous_State.LeftButton == ButtonState.Released && newState.LeftButton == ButtonState.Pressed)
                 {
-                    men.backBtn();
+                    //men.backBtn();
+
+                    men.BackToMainMenu();
                 }
             }
 
@@ -526,14 +655,16 @@ namespace newSpace3_2
         }
 
         // hace el calulo de mover el laser shot
-        public void UserShootsALaser( ref Boolean hasPaused, SoundEffect shot, Boolean isSoundOn, ref bool inGameRunning)
+        public void UserShootsALaser(ref Boolean hasPaused, SoundEffect shot, Boolean isSoundOn, ref bool inGameRunning)
         {
             previous_State = mousymouse;
 
-                mousymouse = Mouse.GetState();
+            mousymouse = Mouse.GetState();
 
-                clickedArea = new Rectangle(mousymouse.X, mousymouse.Y, 30, 30);
+            clickedArea = new Rectangle(mousymouse.X, mousymouse.Y, 30, 30);
 
+            if (men.GetSplashScreenTimer() > 199)
+            {
                 if (mousymouse.LeftButton == ButtonState.Pressed && previous_State.LeftButton == ButtonState.Released)
                 {
                     if (!playerDied)
@@ -552,7 +683,7 @@ namespace newSpace3_2
                             //men.volColli(imgRec[10], imgRec[9], clickedArea);
                         }
 
-                        else 
+                        else
                         {
                             sE.CheckForEnemyCollision(sE.GetEnemyRecs(), crossHColiBox, imgRec[3], clickedArea);
                         }
@@ -589,7 +720,7 @@ namespace newSpace3_2
 
                         imgRec[2].X = Convert.ToInt32(initialLaserPosition.X);
 
-                        imgRec[2].Y = Convert.ToInt32(initialLaserPosition.Y);                        
+                        imgRec[2].Y = Convert.ToInt32(initialLaserPosition.Y);
 
                         #endregion
 
@@ -606,7 +737,7 @@ namespace newSpace3_2
 
                         imgRec[5].X = Convert.ToInt32(initialLaserPosition2.X);
 
-                        imgRec[5].Y = Convert.ToInt32(initialLaserPosition2.Y); 
+                        imgRec[5].Y = Convert.ToInt32(initialLaserPosition2.Y);
 
                         #endregion
 
@@ -629,45 +760,46 @@ namespace newSpace3_2
 
                         initialLaserPosition.X = -60;
 
-                            initialLaserPosition.Y = 500;
+                        initialLaserPosition.Y = 500;
 
-                            imgRec[2].X = Convert.ToInt32(initialLaserPosition.X);
+                        imgRec[2].X = Convert.ToInt32(initialLaserPosition.X);
 
-                            imgRec[2].Y = Convert.ToInt32(initialLaserPosition.Y);
+                        imgRec[2].Y = Convert.ToInt32(initialLaserPosition.Y);
 
                         #endregion
 
                         #region right laser
 
-                            initialLaserPosition2.X = 860;
+                        initialLaserPosition2.X = 860;
 
-                            initialLaserPosition2.Y = 500;
+                        initialLaserPosition2.Y = 500;
 
-                            imgRec[5].X = Convert.ToInt32(initialLaserPosition2.X);
+                        imgRec[5].X = Convert.ToInt32(initialLaserPosition2.X);
 
-                            imgRec[5].Y = Convert.ToInt32(initialLaserPosition2.Y);
+                        imgRec[5].Y = Convert.ToInt32(initialLaserPosition2.Y);
 
-                            #endregion
+                        #endregion
 
-                            okToShot = false;
+                        okToShot = false;
 
-                            shotOnceflag = true;               
+                        shotOnceflag = true;
                     }
 
-                #endregion
-                    
+                    #endregion
+
                 }
 
                 #endregion
+            }
         }
 
         // regresa la posicion del laser para que se pueda usar cuando se dibuja en el menu
-        public Rectangle setLaserRect()
+        public Rectangle GetLaserRect()
         {
             return imgRec[2];
         }
 
-        public Rectangle setLaserRect2()
+        public Rectangle GetLaserRect2()
         {
             return imgRec[5];
         }
@@ -689,11 +821,9 @@ namespace newSpace3_2
         }
 
         // cambia los colores al HUD
-        public void ChangeHudColors(Color hd, Color font)
+        public void ChangeHudColors(Color hd)
         {
             hdColor = hd;
-
-            //ptsFontColor = font;
         }
 
         //cuando el player le den esto va actualizar su vida de acuerdo al dmg del enemigo
@@ -713,11 +843,11 @@ namespace newSpace3_2
                 updatePlayerHp();
             }
 
-            // no puede ser else por que ncesito que haga los 2
-            if (hpBarLowLayerLength == 0f)
+            // no puede ser else por que necesito que haga los 2
+            if (hpBarLowLayerLength < 1)
             {
                 playerDied = true;
-            }            
+            }
         }
 
         // plays screen cracked and stops accelerometro
@@ -726,6 +856,8 @@ namespace newSpace3_2
             if (screenValue > 0.50)
             {
                 isInGameRunning = false;
+
+                men.SetIsGameRunning(isInGameRunning);
 
                 PlaySound(ref playPlayerExplosionOnce, playerExplosionSound);
 
@@ -805,7 +937,7 @@ namespace newSpace3_2
             {
                 if (red)
                 {
-                    ChangeHudColors(Color.Red, Color.White);
+                    ChangeHudColors(Color.Red);
 
                     if (counter < 20)
                     {
@@ -824,7 +956,7 @@ namespace newSpace3_2
                 {
                     //displayHD(sp, sf);
 
-                    ChangeHudColors(Color.White, Color.Navy);
+                    ChangeHudColors(Color.White);
 
                     if (counter < 20)
                     {
@@ -843,26 +975,26 @@ namespace newSpace3_2
                 //si el enemy is dead, do this
             else
             {
-                ChangeHudColors(Color.White, Color.Navy);
+                ChangeHudColors(Color.White);
 
                 displayHD(sp, sf);
             }
         }
 
         //regresa el state para dejar saber que el inGame mode sigue corriendo 
-        public Boolean setIsInGameRunning()
+        public Boolean GetIsInGameRunning()
         {
             return isInGameRunning;
         }
 
         // asigna el state del InGameRunning de menu
-        public void getIsInGameRunning(bool isRunning)
+        public void SetIsInGameRunning(bool isRunning)
         {
             isInGameRunning = isRunning;
         }
 
         // asigna el state de pause que viene de menu
-        public void getHasInGamePaused(bool hasPaused)
+        public void SetHasInGamePaused(bool hasPaused)
         {
             isInGamePaused = hasPaused;
         }
@@ -899,6 +1031,8 @@ namespace newSpace3_2
         //display HUD normal
         public void displayHD(SpriteBatch sp, SpriteFont sf)
         {
+            if (isNotFirstTimePlaying)
+            {
                 sp.Draw(hudImgs[0], new Rectangle(0, 0, hudImgs[0].Width - 10, hudImgs[0].Height), hdColor);
 
                 sp.Draw(hudImgs[3], imgRec[1], null, hdColor, 0, centerImgsOrigin[1], SpriteEffects.None, 0);
@@ -907,20 +1041,23 @@ namespace newSpace3_2
 
                 sp.Draw(hudImgs[4], imgRec[3], hdColor);
 
-            //pts
+                //High score
+                if (isInGameRunning)
+                    sp.DrawString(sf, men.GetHighScore().ToString(), new Vector2(370, 10), Color.LightGray);
+
+                //pts
                 sp.DrawString(sf, sE.GetPts().ToString(), new Vector2(580, 435), Color.LightGray);
 
                 DisplayMultiplier(sp);
 
                 //sp.DrawString(sf, "red: " + red.ToString(), new Vector2(100, 200), Color.Yellow);
-
-                
+            }
         }
 
         //display crosshair. Lo tengo aparte para qu siempre apareca y no se afectado por el warning mode
         public void displayCrosshair(SpriteBatch sp, SpriteFont sf)
         {
-            sp.Draw(hudImgs[5], imgRec[4], null, Color.White, 0, centerImgsOrigin[2], SpriteEffects.None, 0);           
+            sp.Draw(hudImgs[5], imgRec[4], null, Color.White, 0, centerImgsOrigin[2], SpriteEffects.None, 0);
         }
 
         /*
@@ -934,7 +1071,7 @@ namespace newSpace3_2
             imgRec[8] = new Rectangle();
         }
 
-        private void PausevolBtns(SpriteBatch sp)
+        private void PauseVolBtns(SpriteBatch sp)
         {
             //cada vez que se entra a un menu se necesita empezar con esto para empezar con un nuevo state
             //previous_State = Mouse.GetState();
@@ -956,7 +1093,7 @@ namespace newSpace3_2
                 {
                     sp.Draw(hudImgs[14], imgRec[9], Color.LightBlue);
 
-                    men.GetIsSoundOn(true);
+                    men.SetIsSoundOn(true);
 
                     //soundOn = true;
 
@@ -970,7 +1107,7 @@ namespace newSpace3_2
 
                     //else
                     //{
-                        MediaPlayer.Resume();
+                    MediaPlayer.Resume();
                     //}
 
                     men.playBtnSound();
@@ -1026,7 +1163,7 @@ namespace newSpace3_2
 
                     men.playBtnSound();
 
-                    men.GetIsSoundOn(false);
+                    men.SetIsSoundOn(false);
 
                     //soundOn = false;
 
@@ -1120,7 +1257,7 @@ namespace newSpace3_2
 
                     #endregion
 
-                    men.BeforeArcadeStarts(hudImgs[17]);
+                    men.BeforeArcadeStarts();
 
                     UnpauseGame(ref isInGamePaused, ref isInGameRunning);
                 }
@@ -1163,7 +1300,7 @@ namespace newSpace3_2
                 //VOLUMEN open
                 sp.Draw(hudImgs[16], new Rectangle(428, 153, hudImgs[16].Width + 42, hudImgs[16].Height + 16), Color.White);
 
-                PausevolBtns(sp);
+                PauseVolBtns(sp);
 
                 PauseRetryBtn(sp);
 
@@ -1191,7 +1328,7 @@ namespace newSpace3_2
 
             if (anchoActual >= (int)widthTillImpact)
             {
-                playWarningMode(sp,k,sf);
+                playWarningMode(sp, k, sf);
             }
 
             else if (anchoActual <= (int)widthTillImpact)

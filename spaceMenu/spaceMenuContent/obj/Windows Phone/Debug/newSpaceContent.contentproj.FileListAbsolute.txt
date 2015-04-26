@@ -22,3 +22,8 @@ C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 2.8\spaceMenu\
 C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 2.9\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\newSpaceContent.contentprojResolveAssemblyReference.cache
 C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\newSpaceContent.contentprojResolveAssemblyReference.cache
 C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\newSpaceContent.contentprojResolveAssemblyReference.cache
+C:\Users\Marybel\Dropbox\Imagine Cup(S.P.A.C.E)\New stuff\Programming\newSpace 3.2\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 3.2\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 3.2 - Copy\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+C:\Users\Marybel\Documents\Visual Studio 2010\Projects\newSpace 3.3\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\ResolveAssemblyReference.cache
+C:\Users\DevilDesk\Documents\Visual Studio 2010\Projects\newSpace 3.4\spaceMenu\spaceMenuContent\obj\Windows Phone\Debug\newSpaceContent.contentprojResolveAssemblyReference.cache

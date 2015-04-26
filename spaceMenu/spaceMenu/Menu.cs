@@ -12,14 +12,19 @@ using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 using System.Windows;
 
-namespace newSpace3_2
+namespace newSpace3_4
 {
-    /* Notes, ideas and problems: 2/dec/2014 
+    /* Notes, ideas and problems: 15/mar/2015
+     * 
+     * Si chocan 2 a la vez un enemy suena y otro no. Pero si mueres, los enemigos siguen spawning con el
+     * scoreboard displayed(Needs fixing. I think I got it.).
      * 
      */
 
-    // maneja todo lo que tiene que ver con el menu
-    class Menu
+    /// <summary>
+    /// Maneja todo lo que tiene que ver con el menu
+    /// </summary>
+    class Menu 
     {
         #region class Variables
 
@@ -27,10 +32,10 @@ namespace newSpace3_2
 
         private SpaceEnemies se;
 
-        private Texture2D[] imgs = new Texture2D[14]; // tiene todas las imgs
+        private Texture2D[] imgs = new Texture2D[15]; // tiene todas las imgs
 
-        private Rectangle[] MenuImgsRec = new Rectangle[14]; // tiene todos los rec de todas la imagenes
-            
+        private Rectangle[] MenuImgsRec = new Rectangle[15]; // tiene todos los rec de todas la imagenes
+
         private Rectangle mouseRect = new Rectangle(); // tiene el rectangulo del mouse
 
         private SoundEffect btnPressed,// sonido de boton pressed
@@ -42,9 +47,14 @@ namespace newSpace3_2
 
         private SpriteFont sf;
 
+        Vector2 pos = new Vector2(
+               GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2,
+               (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width) / 2);
+
         Color col = Color.White;
 
-        int granTotal = 0, // guarda el resultado de points menos missedShots 
+        int grandTotal = 0, // guarda el resultado de points menos missedShots 
+            splashScreenTimer = 0, // controls when the slash screen starts and when it ends
             highScore; // name says it
 
         private float menuNumber = 0.0f, //te deja saber en que parte del menu estas. 0 = main menu, 1 = start arcade, 2 = campaing, 3 = option y
@@ -53,6 +63,7 @@ namespace newSpace3_2
 
         private bool hasSongStarted = false, // te deja saber si la cancion empezo. Si le das play mas de una vez la musca se escucha multiples veces 
             //en layers.
+            hasSplashScreenSongStarted = false,
             hasGameOverSongStarted = false, // te deja saber si la cancion empezo para que no de play mas de una vez
             isInGameRunning = false, // te deja saber si el inGame mode empezo
             hasInGamePaused = false, // te deja saber si el juego fue pausado es solo para la seccion del laser
@@ -67,8 +78,39 @@ namespace newSpace3_2
 
         #endregion
 
+       public int GetSplashScreenTimer()
+       {
+           return splashScreenTimer;
+       }
 
-       public void setHud(HUD h)
+        //play splash screen animation
+       public void PlaySplashScreen(Texture2D logo, Song splashScreenSong)
+       {  
+           Vector2 logoCentralizedOrigin = new Vector2((float)logo.Height / 2, (float)logo.Width / 2);
+
+           if (splashScreenTimer < 200)
+           {
+               if (!hasSplashScreenSongStarted)
+               {
+                   hasSplashScreenSongStarted = true;
+
+                   MediaPlayer.Play(splashScreenSong);
+               }
+
+               sp.Draw(logo, new Rectangle(0, 0, logo.Width + 103, logo.Height + 2), Color.White);
+
+               oldState = Mouse.GetState();
+
+               //if not pressed keep running splash screen, else skip to main menu 
+               if (oldState.LeftButton != ButtonState.Pressed)
+                   splashScreenTimer++;
+
+               else
+                   splashScreenTimer = 200;
+           }
+       }
+
+       public void SetHud(HUD h)
        {
            hd = h;
        }
@@ -85,13 +127,13 @@ namespace newSpace3_2
        }
 
         // el valor se asigna cuando se presionan los btns en pause screen
-       public void GetIsSoundOn(bool isSoundOn)
+       public void SetIsSoundOn(bool isSoundOn)
        {
            soundOn = isSoundOn;
        }
 
        //asigna imagenes a los rectangulos
-        private void setRects()
+        private void SetRects()
         {
             for (int i = 0; i < MenuImgsRec.Length; i++)
             {
@@ -100,25 +142,53 @@ namespace newSpace3_2
         }
 
         // calcula los missed shits
-        private double CalcAcurracy(int p, int mi, double min)
+        private double CalcAcurracy(int p, int mi)
         {
-            min = Math.Abs(mi + p);
+            //try
+            //{
+            //    min = Math.Abs(mi + p);
 
-            min = p / min;
+            //    min = p / min;
 
-            min *= 100;
+            //    min *= 100;
 
-            min = Math.Round(min, 2);
+            //    min = Math.Round(min, 2);
+            //}
 
-            return min;
+            //catch
+            //{
+            //    min = 0;
+            //}
+
+            double avg = 0.0;
+
+            try
+            {
+               avg = Math.Abs(mi + p);
+
+                avg = p / avg;
+
+                avg *= 100;
+
+                avg = Math.Round(avg, 2);
+            }
+
+            catch
+            {
+                avg = 0;
+            }
+
+            return avg;
         }
-
-        //verifica si el final score es mas alto que el high score y si lo es lo asigna
+        
+       /// <summary>
+       ///  Verifica si el final score es mas alto que el high score y si lo es lo asigna
+       /// </summary>
         public void CalcHighScore()
         {
-            if (granTotal > highScore)
+            if (grandTotal > highScore)
             {
-                highScore = granTotal;
+                highScore = grandTotal;
             }
         }
 
@@ -134,19 +204,19 @@ namespace newSpace3_2
             return highScore;
         }
 
-        public void BeforeArcadeStarts(Texture2D img)
+        public void BeforeArcadeStarts()
         {
             //para que haga lo del screen crack animation bien y que no lo haga en lugar donde no se supone que este
-            hd.getPlayerDied(false);
+            hd.SetPlayerDied(false);
 
             //reset hp bars
             hd.reset();
 
             //sp.Draw(img, MenuImgsRec[13], Color.LightGray);
 
-            hd.getScreenValue(1);
+            hd.SetScreenValue(1);
 
-            hd.ChangeHudColors(Color.White, Color.Navy);
+            hd.ChangeHudColors(Color.White);
 
             hasGameOverSongStarted = false;
 
@@ -154,7 +224,7 @@ namespace newSpace3_2
 
             hasInGamePaused = false;
 
-            hd.getIsInGameRunning(isInGameRunning);
+            hd.SetIsInGameRunning(isInGameRunning);
 
             hasSongStarted = false;
 
@@ -229,7 +299,7 @@ namespace newSpace3_2
 
                     #endregion
 
-                    BeforeArcadeStarts(img);
+                    BeforeArcadeStarts();
                 }
             }
 
@@ -259,7 +329,9 @@ namespace newSpace3_2
 
                 else if (oldState.LeftButton == ButtonState.Released && newState.LeftButton == ButtonState.Pressed)
                 {
-                    backBtn();
+                    //backBtn();
+
+                    BackToMainMenu();
                 }
             }
 
@@ -272,11 +344,11 @@ namespace newSpace3_2
         }
 
         // darkens bg and displays scoreboard
-        public void displayScoreboard(int p, int mi, bool isPlayerDead)
+        public void displayScoreboard(int points, int misses, bool isPlayerDead)
         {
             PlayGameOverSong();
 
-            double min = Convert.ToDouble(mi); // tiene la cantidad de missed shots
+            double avgMissed = Convert.ToDouble(misses); // tiene la cantidad de missed shots
 
             if (menuNumber < 2 && isPlayerDead == true)
             {
@@ -299,25 +371,25 @@ namespace newSpace3_2
                 sp.DrawString(sf, highScore.ToString(), new Vector2(240, 190), Color.White);
 
 
-                sp.DrawString(sf, p.ToString(), new Vector2(430, 110), Color.White);
+                sp.DrawString(sf, points.ToString(), new Vector2(430, 110), Color.White);
 
-                if (p > mi)
-                {
-                    min = CalcAcurracy(p, mi, min);
-                }
+                //if (points > misses)
+                //{
+                    avgMissed = CalcAcurracy(points, misses);
+                //}
 
-                sp.DrawString(sf, Math.Abs(min).ToString() + "%", new Vector2(430, 190), Color.White);
+                sp.DrawString(sf, Math.Abs(avgMissed).ToString() + "%", new Vector2(430, 190), Color.White);
 
-                granTotal = Convert.ToInt32(Math.Abs(p * min));
+                grandTotal = Convert.ToInt32(Math.Abs(points * avgMissed));
 
                 CalcHighScore();
 
-                sp.DrawString(sf, granTotal.ToString(), new Vector2(430, 270), Color.White);
+                sp.DrawString(sf, grandTotal.ToString(), new Vector2(430, 270), Color.White);
             }
         }
 
         // asigna las imagenes a imgs
-        public void getImgs(Texture2D[] pic, SpriteBatch s)
+        public void SetImgs(Texture2D[] pic, SpriteBatch s)
         {
             for (int i = 0; i < pic.Length; i++)
             {
@@ -326,7 +398,7 @@ namespace newSpace3_2
 
             sp = s;
 
-            setRects();
+            SetRects();
 
             placeBtns();
         }
@@ -400,7 +472,7 @@ namespace newSpace3_2
         }
 
         //asigna cancion a menuSong
-        public void getSongs(Song s, Song s2, Song s3)
+        public void SetSongs(Song s, Song s2, Song s3)
         {
             menuSong = s;
 
@@ -418,13 +490,13 @@ namespace newSpace3_2
             }
         }
 
-        public void getMenNum(int num)
+        public void SetMenNum(int num)
         {
             menuNumber = num;
         }
 
         //asigna sonido a btnPressed
-        public void getSound(SoundEffect s, SoundEffect s2)
+        public void SetSound(SoundEffect s, SoundEffect s2)
         {
             btnPressed = s;
 
@@ -446,7 +518,7 @@ namespace newSpace3_2
                         MediaPlayer.Play(menuSong);
                     }
 
-                    else if(menuNumber == 1 && (!hd.setPlayerDied()))
+                    else if(menuNumber == 1 && (!hd.GetPlayerDied()))
                     {
                         MediaPlayer.Play(inGameSong);
                     }
@@ -491,13 +563,13 @@ namespace newSpace3_2
         }
 
         //regresa exit
-        public bool setExit()
+        public bool GetExit()
         {
             return exit;
         }
 
         //reset todo lo que se usa en el inGame en esta area
-        public void ResetInGame()
+        public void BackToMainMenu()
         {
             // guarda ultimo menu
             lastMenuNum = menuNumber;
@@ -511,16 +583,16 @@ namespace newSpace3_2
             // ingame mode stopped
             isInGameRunning = false;
 
-            hd.getHasInGamePaused(false);
+            hd.SetHasInGamePaused(false);
 
             // no cierres el juego
             exit = false;
 
             //para que haga lo del screen crack animation bien y que no lo haga en lugar donde no se supone que este
-            hd.getPlayerDied(false);
+            hd.SetPlayerDied(false);
 
             //para que no mueva los enemigos
-            hd.getIsInGameRunning(isInGameRunning);
+            hd.SetIsInGameRunning(isInGameRunning);
 
             //pare el accelerometro
             hd.AccelStop();
@@ -528,7 +600,7 @@ namespace newSpace3_2
             playBtnSound();
 
             //para que empieze el screen cracked animation de donde es y no lo haga donde no se supone que sea
-            hd.getScreenValue(0);
+            hd.SetScreenValue(0);
 
             //reset hp bars
             hd.reset();
@@ -549,9 +621,15 @@ namespace newSpace3_2
 
             else if (menuNumber < 2)
             {
-                lastMenuNum = menuNumber;
+                //lastMenuNum = menuNumber;
 
-                ResetInGame();                
+                //BackToMainMenu();  
+                if (!hd.GetPlayerDied())
+                {
+                    SetIsGameRunning(hd.GetIsInGameRunning());
+
+                    hd.PauseGame(ref hasInGamePaused, ref isInGameRunning);
+                }
             }
 
             else
@@ -595,9 +673,9 @@ namespace newSpace3_2
 
                     sp.Draw(imgs[7], MenuImgsRec[7], Color.LightBlue);
 
-                    hd.getScreenValue(1);
+                    hd.SetScreenValue(1);
 
-                    hd.ChangeHudColors(Color.White, Color.Navy);
+                    hd.ChangeHudColors(Color.White);
 
                     hasGameOverSongStarted = false;
 
@@ -605,7 +683,7 @@ namespace newSpace3_2
 
                     hasInGamePaused = false;
 
-                    hd.getIsInGameRunning(isInGameRunning);
+                    hd.SetIsInGameRunning(isInGameRunning);
 
                     hasSongStarted = false;
 
@@ -622,6 +700,8 @@ namespace newSpace3_2
                     hd.AccelStart();
 
                     #endregion
+
+                    //BeforeArcadeStarts(
                 }
             }
 
@@ -696,7 +776,7 @@ namespace newSpace3_2
         }
 
         //assign text to spriteFont
-        public void getsf(SpriteFont s)
+        public void SetSf(SpriteFont s)
         {
             sf = s;
         }
@@ -853,13 +933,13 @@ namespace newSpace3_2
         }
 
         //te deja saber si corre toda la mierda del main para que ingame functions funcionen.
-        public bool setIsGameRunning()
+        public bool GetIsGameRunning()
         {
             return isInGameRunning;
         }
 
         //verifica si el juego paro por otro lado, player lost o simply exited
-        public void getIsGameRunning(Boolean isRunning)
+        public void SetIsGameRunning(Boolean isRunning)
         {
             isInGameRunning = isRunning;
         }
@@ -890,57 +970,67 @@ namespace newSpace3_2
                 {
                     doOnce = false;
 
-                    hd.getMenuNum(menuNumber);
+                    hd.SetMenuNum(menuNumber);
                 }
 
-                menuNumber = hd.setMenuNum();
+                hd.PlayHowToPlay();                
 
-                mp.displayInGameBg(sp);
+                if (hd.GetIsNot1stTimePlaying())
+                {
+                    menuNumber = hd.GetMenuNum();
 
-                se.CheckPositionsAfterRand();
+                    mp.displayInGameBg(sp);
 
-                se.displayImgs(sp, sf);
+                    //se.CheckPositionsAfterRand();
 
-                hd.playScreenCrackAnimation(sp, se.GetPlayerHit());
+                    se.displayImgs(sp, sf);
 
-                hd.UserShootsALaser( ref hasInGamePaused, shotFired, soundOn, ref isInGameRunning);
+                    hd.playScreenCrackAnimation(sp, se.GetPlayerHit());
 
-                // draw laser
-                sp.Draw(hd.setLaserImg(), hd.setLaserRect(), null, Color.White, 0, new Vector2(hd.setLaserRect().Width / 2, hd.setLaserRect().Height / 2),
-                    SpriteEffects.None, 0);
+                    hd.UserShootsALaser(ref hasInGamePaused, shotFired, soundOn, ref isInGameRunning);
 
-                sp.Draw(hd.setLaserImg(), hd.setLaserRect2(), null, Color.White, 0, new Vector2(hd.setLaserRect().Width / 2, hd.setLaserRect().Height / 2),
-                    SpriteEffects.None, 0);
+                    // draw laser
+                    sp.Draw(hd.GetLaserImg(), hd.GetLaserRect(), null, Color.White, 0, new Vector2(hd.GetLaserRect().Width / 2, hd.GetLaserRect().Height / 2),
+                        SpriteEffects.None, 0);
 
-                hd.MoveCrosshair();
+                    sp.Draw(hd.GetLaserImg(), hd.GetLaserRect2(), null, Color.White, 0, new Vector2(hd.GetLaserRect().Width / 2, hd.GetLaserRect().Height / 2),
+                        SpriteEffects.None, 0);
 
-                hd.displayCrosshair(sp, sf);
+                    hd.MoveCrosshair();
 
-                se.SetPlayerHit(hd.setPHit());
+                    hd.displayCrosshair(sp, sf);
 
-                #region small guy
-                //esta heredando imgRect para evitar null refrence error
-                hd.checkDistanceFromScreen(200, se.getEnemyImgRects()[1].Width, sp, sf, killedSmall);
+                    se.SetPlayerHit(hd.GetPHit());
 
-                getIsGameRunning(hd.setIsInGameRunning());
 
-                #endregion
+                    #region small guy
+                    //esta heredando imgRect para evitar null refrence error
+                    hd.checkDistanceFromScreen(200, se.GetEnemyImgRects()[1].Width, sp, sf, killedSmall);
 
-                #region big guy
+                    SetIsGameRunning(hd.GetIsInGameRunning());
 
-                hd.checkDistanceFromScreen(300, se.getEnemyImgRects()[0].Width, sp, sf, killedBig);
+                    #endregion
 
-                getIsGameRunning(hd.setIsInGameRunning());
+                    #region big guy
 
-                #endregion
+                    hd.checkDistanceFromScreen(300, se.GetEnemyImgRects()[0].Width, sp, sf, killedBig);
 
-                #region gray small
+                    SetIsGameRunning(hd.GetIsInGameRunning());
 
-                hd.checkDistanceFromScreen(100, se.getEnemyImgRects()[2].Width, sp, sf, killedSmallGray);
+                    #endregion
 
-                getIsGameRunning(hd.setIsInGameRunning());
+                    #region gray small
 
-                #endregion
+                    hd.checkDistanceFromScreen(100, se.GetEnemyImgRects()[2].Width, sp, sf, killedSmallGray);
+
+                    SetIsGameRunning(hd.GetIsInGameRunning());
+
+                    #endregion
+
+                    //sp.DrawString(sf, isInGameRunning.ToString(), new Vector2(100, 100), Color.Red);
+                }
+
+                //sp.DrawString(sf, " Not 1st time" + hd.GetIsNot1stTimePlaying().ToString(), new Vector2(200, 200), Color.Red);
             }
 
             #endregion

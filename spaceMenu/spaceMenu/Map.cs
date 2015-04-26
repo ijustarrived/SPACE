@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 
-namespace newSpace3_2
+namespace newSpace3_4
 {
     /*Notes, ideas and problems: 23/nov/2014 
      * 
@@ -31,8 +31,11 @@ namespace newSpace3_2
        private float rotationNum = 0; // tiene el numero de rotacion
 
 
-        //pone todas las imagenes en mapImages para que se usen en la clase
-        public void getMapImgs(Texture2D[] imgList)
+        /// <summary>
+       /// Pone todas las imagenes en mapImages para que se usen en la clase
+        /// </summary>
+        /// <param name="imgList">Array de imgs</param>
+        public void SetMapImgs(Texture2D[] imgList)
         {
             for (int i = 0; imgList.Length > i; i++)
             {
@@ -40,7 +43,10 @@ namespace newSpace3_2
             }
         }
 
-        //display background
+        /// <summary>
+        /// Display background
+        /// </summary>
+        /// <param name="sp">Objeto</param>
         public void displayInGameBg(SpriteBatch sp)
         {
             bgRect.Width = mapImages[0].Width;

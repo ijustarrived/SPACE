@@ -10,10 +10,11 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 
-namespace newSpace3_2
+namespace newSpace3_4
 {
 
-    /* To do and notes: 2/jan/2014
+    /* To do and notes: 27/feb/2014
+     * 
      * 
      */
     public class Main : Microsoft.Xna.Framework.Game
@@ -23,7 +24,7 @@ namespace newSpace3_2
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Texture2D[] imgs = new Texture2D[14], // tiene todas las imagenes 
+        Texture2D[] imgs = new Texture2D[15], // tiene todas las imagenes 
             mapImages,
             enemyImages,
             hudImages;
@@ -44,6 +45,7 @@ namespace newSpace3_2
 
         Song menuSong, // Main menu song
             gameOverSong,
+            splashScreenSong,
             inGameSong;
 
         float colorTranspIntensity = 0.0f;
@@ -80,7 +82,7 @@ namespace newSpace3_2
 
         protected override void OnActivated(object sender, EventArgs args)
         {
-            loadSave.LoadFile(men);
+            loadSave.LoadFile(men, hd);
 
             base.OnActivated(sender, args);
         }
@@ -91,15 +93,15 @@ namespace newSpace3_2
 
             hd.InitAccel();
 
-            hudImages = new Texture2D[18];
+            hudImages = new Texture2D[19];
 
             enemyImages = new Texture2D[9];
 
-            hd.getMenu(men);
+            hd.SetMenu(men);
 
-            hd.GetSpaceEnemies(se);
+            hd.SetSpaceEnemies(se);
 
-            men.setHud(hd);
+            men.SetHud(hd);
 
             se.SetHd(hd);
 
@@ -110,7 +112,7 @@ namespace newSpace3_2
 
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch = new SpriteBatch(GraphicsDevice);            
 
             #region menu images
 
@@ -140,9 +142,11 @@ namespace newSpace3_2
 
             imgs[12] = Content.Load<Texture2D>(@"pictures/mainMenuBtn");
 
-            imgs[13] = Content.Load<Texture2D>(@"pictures/retryBtn"); 
+            imgs[13] = Content.Load<Texture2D>(@"pictures/retryBtn");
 
-            men.getImgs(imgs, spriteBatch);
+            imgs[14] = Content.Load<Texture2D>(@"pictures/rRLogo");
+
+            men.SetImgs(imgs, spriteBatch);
 
             #endregion
 
@@ -151,7 +155,7 @@ namespace newSpace3_2
             //ingame background
             mapImages[0] = Content.Load<Texture2D>(@"MapImgs/bigNeb");
 
-            mp.getMapImgs(mapImages);
+            mp.SetMapImgs(mapImages);
 
             #endregion
 
@@ -193,7 +197,11 @@ namespace newSpace3_2
 
             hudImages[17] = Content.Load<Texture2D>(@"HUDpics/Retry");
 
-            hd.getHUDImg(hudImages, imgs);
+            hudImages[18] = Content.Load<Texture2D>(@"HUDpics/howToPlay");
+
+            hd.SetHUDImg(hudImages, imgs);
+
+            hd.SetSpriteBatch(spriteBatch);
 
             #endregion
 
@@ -231,11 +239,11 @@ namespace newSpace3_2
 
             playerExplosion = Content.Load<SoundEffect>(@"audio-fx/playerExplosion");
 
-            hd.GetFxs(screenCrackSound, playerExplosion);
+            hd.SetFxs(screenCrackSound, playerExplosion);
 
             se.SetFx(enemyDead);
 
-            men.getSound(btnSound, shotSound);
+            men.SetSound(btnSound, shotSound);
 
             #endregion
 
@@ -247,7 +255,9 @@ namespace newSpace3_2
 
             gameOverSong = Content.Load<Song>(@"audio-fx/gameOver");
 
-            men.getSongs(menuSong, inGameSong, gameOverSong);
+            splashScreenSong = Content.Load<Song>(@"audio-fx/spashScreenAudio");
+
+            men.SetSongs(menuSong, inGameSong, gameOverSong);
 
             #endregion
 
@@ -255,7 +265,7 @@ namespace newSpace3_2
 
             sf = Content.Load<SpriteFont>("font");
 
-            men.getsf(sf);
+            men.SetSf(sf);
 
             MediaPlayer.IsRepeating = true;
 
@@ -270,12 +280,12 @@ namespace newSpace3_2
 
         protected override void Update(GameTime gameTime)
         {
-            men.startMusic();
+            //men.startMusic();
 
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
             {
-                if (men.setExit())
+                if (men.GetExit())
                 {
                     this.Exit();
                 }
@@ -288,78 +298,100 @@ namespace newSpace3_2
             base.Update(gameTime);
         }
 
-        // pasa el valor del screen a hd y a space enemies
+        /// <summary>
+        /// Pasa el valor del screen a hd y a space enemies
+        /// </summary>
         private void PlaceScrnValues()
         {
-            se.SetScrnValue(hd.setScreenValue());
+            se.SetScrnValue(hd.GetScreenValue());
 
-            hd.getScreenValue(se.GetScreenVal());
+            hd.SetScreenValue(se.GetScreenVal());
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(new Color(20, 20, 20));
 
             spriteBatch.Begin();
 
-            #region stuff to run when switches to ingame mode
+            men.PlaySplashScreen(imgs[14], splashScreenSong);
 
-            //only makes enemies move closer
-            if (men.setIsGameRunning())
+            if (men.GetSplashScreenTimer() > 199)
             {
-                hd.GetIsSoundOn();
+                men.startMusic();
 
-                se.CalcMultTimer(se.GetMultTimer(), se.GetIsMultActive()); 
+                #region stuff to run when switches to ingame mode
 
-                se.enemiesGetCloser(spriteBatch, hd);
-
-                enemyRect = se.GetEnemyRecs();
-
-                bigKilled = se.GetBigEnemyKilled();
-
-                PlaceScrnValues();
-                smallKilled = se.GetSmallEnemyKilled();
-
-                PlaceScrnValues();
-
-                graySmallKilled = se.GetSmallGrayKilled();
-
-                PlaceScrnValues();
-            }
-
-            #endregion
-
-            men.playSections(se, mp, bigKilled, smallKilled, graySmallKilled, mapImages);
-
-            #region gameover black screen thing
-
-            //lo tengo en el main por que habian veces que algunas imgs se ponian oscuras y otras no por que estaban encima del layer
-
-            if (hd.setPlayerDied())
-            {
-                spriteBatch.Draw(mapImages[0], Vector2.Zero, Color.Black * colorTranspIntensity);                
-
-                if (colorTranspIntensity < 0.50f)
+                //only makes enemies move closer
+                if (men.GetIsGameRunning())
                 {
-                    colorTranspIntensity += 0.01f;
+                    //hd.PlayHowToPlay(hudImages[18]);
+
+                    if (hd.GetIsNot1stTimePlaying())
+                    {
+                        hd.GetIsSoundOn();
+
+                        se.CalcMultTimer(se.GetMultTimer(), se.GetIsMultActive());
+
+                        se.enemiesGetCloser(spriteBatch, hd);
+
+                        enemyRect = se.GetEnemyRecs();
+
+                        bigKilled = se.GetBigEnemyKilled();
+
+                        PlaceScrnValues();
+                        smallKilled = se.GetSmallEnemyKilled();
+
+                        PlaceScrnValues();
+
+                        graySmallKilled = se.GetSmallGrayKilled();
+
+                        PlaceScrnValues();
+                    }
                 }
 
-                else
-                {
-                    men.displayScoreboard(se.GetPts(), se.GetMiss(), hd.setPlayerDied());
-                }
-            }
+                #endregion
 
-            #endregion
+                    men.playSections(se, mp, bigKilled, smallKilled, graySmallKilled, mapImages);
+
+
+                    #region gameover black screen thing
+
+                    //lo tengo en el main por que habian veces que algunas imgs se ponian oscuras y otras no por que estaban encima del layer
+
+                    if (hd.GetPlayerDied())
+                    {
+                        spriteBatch.Draw(mapImages[0], Vector2.Zero, Color.Black * colorTranspIntensity);
+
+                        if (colorTranspIntensity < 0.50f)
+                        {
+                            colorTranspIntensity += 0.01f;
+                        }
+
+                        else
+                        {
+                            men.displayScoreboard(se.GetPts(), se.GetMiss(), hd.GetPlayerDied());
+                        }
+                    }
+
+                    #endregion                
+            }
 
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
 
+        protected override void OnDeactivated(object sender, EventArgs args)
+        {
+            loadSave.SafeFile(men, hd);
+
+            base.OnDeactivated(sender, args);
+        }
+
         protected override void OnExiting(object sender, EventArgs args)
         {
-            loadSave.SafeFile(men);
+            //loadSave.SafeFile(men, hd);
 
             base.OnExiting(sender, args);
         }
